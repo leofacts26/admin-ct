@@ -93,12 +93,12 @@ const VendorListExport = () => {
   
 
   const columns = [
-    {
-      name: "ID",
-      selector: row => row.id,
-      sortable: true,
-      width: "100px",
-    },
+    // {
+    //   name: "ID",
+    //   selector: row => row.id,
+    //   sortable: true,
+    //   width: "100px",
+    // },
     {
       name: "Company ID",
       selector: row => row.company_id,

@@ -425,7 +425,7 @@ const TiffinVendorList = () => {
         <div className="row mb-4  me-2">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="header-title">
-              Total Registered Tiffins - {cateringVendors?.length}
+              Total Tiffins - {cateringVendors?.length}
             </h1>
             <Button variant="primary" onClick={() => exportToExcel(formatDataForExport(), 'vendorlist')}>
               Export

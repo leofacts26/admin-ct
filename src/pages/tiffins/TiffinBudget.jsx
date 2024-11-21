@@ -95,11 +95,11 @@ const TiffinBudjet = () => {
 
 
   const columns = [
-    {
-      name: "ID",
-      selector: row => row.id,
-      sortable: true,
-    },
+    // {
+    //   name: "ID",
+    //   selector: row => row.id,
+    //   sortable: true,
+    // },
     {
       name: "Start Price",
       selector: row => row.startprice,

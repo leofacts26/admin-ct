@@ -10,6 +10,8 @@ import { cater_vendor_type } from '../../constants';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FaEdit } from "react-icons/fa";
+import Select from 'react-select';
+import { fetchAdminRoleListData } from '../../features/adminRoleSlice';
 
 
 
@@ -29,6 +31,7 @@ const initialState = {
 
 
 const AdminListUsers = () => {
+  const { adminRoleList } = useSelector((state) => state.roleSlice)
   const dispatch = useDispatch()
   const { adminUserList, isLoading } = useSelector((state) => state.users)
   const [values, setValues] = useState(initialState)
@@ -50,6 +53,9 @@ const AdminListUsers = () => {
     setValues({ ...values, [name]: value })
   }
 
+  useEffect(() => {
+    dispatch(fetchAdminRoleListData());
+  }, [dispatch]);
 
 
   useEffect(() => {
@@ -102,6 +108,13 @@ const AdminListUsers = () => {
 
 
 
+  // Prepare options from vendorNotificationList
+  const receiverOptions = adminRoleList?.map((item) => ({
+    value: item.role_id,
+    label: item.role_name,
+  }));
+
+
 
   const handleStatusToggle = async (item) => {
     const data = {
@@ -123,21 +136,25 @@ const AdminListUsers = () => {
       name: "Name",
       selector: (row) => row.name,
       sortable: true,
+      width: '150px'
     },
     {
       name: "Email",
       selector: (row) => row.email,
       sortable: true,
+       width: '150px'
     },
     {
       name: "Username",
       selector: (row) => row.username,
       sortable: true,
+       width: '150px'
     },
     {
       name: "Phone Number",
       selector: (row) => row.phone_number,
       sortable: true,
+       width: '150px'
     },
     {
       name: "Pincode",
@@ -274,7 +291,7 @@ const AdminListUsers = () => {
               Total Admin User List - {adminUserList?.length}
             </h1>
             <button className='btn btn-primary fit-content' variant="primary" onClick={handleShow}>
-              Create Admin User
+              Add Employee
             </button>
           </div>
         </div>
@@ -310,7 +327,7 @@ const AdminListUsers = () => {
       <Modal centered show={show} onHide={handleClose}>
         <form onSubmit={onHandleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title> {editId ? 'Edit Admin Users' : 'Create Admin Users'} </Modal.Title>
+            <Modal.Title> {editId ? 'Edit Employee' : 'Add Employee'} </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">
@@ -327,8 +344,16 @@ const AdminListUsers = () => {
                 <input type="text" className="form-control" placeholder="email@gmail.com" name="email" required onChange={handleChange} value={values.email} />
               </div>
               <div className='col-12 mt-4'>
-                <label for="name" className="form-label"> <b>Role ID</b> </label>
-                <input type="text" className="form-control" placeholder="1" name="role_id" required onChange={handleChange} value={values.role_id} />
+                <label htmlFor="receiverId" className="form-label"><b>User Phonenumber</b></label>
+                <Select
+                  options={receiverOptions}
+                  onChange={(selectedOption) =>
+                    handleChange({ target: { name: 'role_id', value: selectedOption ? selectedOption.value : '' } })
+                  }
+                  placeholder="Role"
+                  isClearable
+                  isSearchable
+                />
               </div>
               <div className='col-12 mt-4'>
                 <label for="name" className="form-label"> <b>Country</b> </label>

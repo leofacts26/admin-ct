@@ -88,18 +88,18 @@ const KitchenType = () => {
 
 
   const columns = [
-    {
-      name: "ID",
-      selector: row => row.id,
-      sortable: true,
-    },
+    // {
+    //   name: "ID",
+    //   selector: row => row.id,
+    //   sortable: true,
+    // },
     {
       name: "Name",
       selector: row => row.name,
       sortable: true,
     },
     {
-      name: "Cfreated At",
+      name: "Created at",
       selector: row => row.createdAt.slice(0, 10),
       sortable: true,
     },

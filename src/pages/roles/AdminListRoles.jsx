@@ -92,21 +92,21 @@ const AdminListRoles = () => {
 
 
   const columns = [
-    {
-      name: "Role ID",
-      selector: row => row.role_id,
-      sortable: true,
-    },
+    // {
+    //   name: "Role ID",
+    //   selector: row => row.role_id,
+    //   sortable: true,
+    // },
     {
       name: "role name",
       selector: row => row.role_name,
       sortable: true,
     },
-    {
-      name: "is active",
-      selector: row => row.is_active,
-      sortable: true,
-    },
+    // {
+    //   name: "is active",
+    //   selector: row => row.is_active,
+    //   sortable: true,
+    // },
     {
       name: "created at",
       selector: row => row.created_at.slice(0, 10),
@@ -205,10 +205,10 @@ const AdminListRoles = () => {
         <div className="row mb-4  me-2">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="header-title">
-            Total Admin Role List - {adminRoleList?.length}
+            Total Role List - {adminRoleList?.length}
             </h1>
             <button className='btn btn-primary fit-content' variant="primary" onClick={handleShow}>
-              Create Admin Role
+              Create Role
             </button>
           </div>
         </div>

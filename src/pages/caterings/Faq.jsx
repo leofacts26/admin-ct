@@ -223,14 +223,14 @@ const Faq = () => {
         <div className='row w-100 mb-4 d-flex justify-content-between'>
           <div style={{ width: 'fit-content' }}>
             <h1 className="header-title">
-              Vendor FAQ's
+              FAQ’s Management
             </h1>
           </div>
           <div style={{ width: 'fit-content' }}>
             <Form.Select aria-label="Default select example" name="selectType"
               value={selectType} onChange={(e) => setSelectType(e.target.value)} style={{ width: '300px' }}>
-              <option value="user-caterer">User Caterer Faq</option>
-              <option value="user-tiffin">User Tiffin Faq</option>
+              <option value="user-caterer">Customer Caterer Faq</option>
+              <option value="user-tiffin">Customer Tiffin Faq</option>
               <option value="vendor-caterer">Vendor Caterer Faq</option>
               <option value="vendor-tiffin">Vendor Tiffin Faq</option>
             </Form.Select>
@@ -279,15 +279,15 @@ const Faq = () => {
       <Modal centered show={show} onHide={handleClose}>
         <form onSubmit={onHandleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title> {editId ? "Edit" : 'Create'}  Vendor FAQ's</Modal.Title>
+            <Modal.Title> {editId ? "Edit" : 'Create'}  FAQ's </Modal.Title>
           </Modal.Header>
           <Modal.Body>
 
             <label for="name" className="form-label"> {editId ? "Edit" : "Add"}  Question</label>
             <Form.Select required aria-label="Default select example" name="type" value={values.type} onChange={onHandleChange}>
               <option value="">Select an option</option>
-              <option value="user-caterer">User Caterer Faq</option>
-              <option value="user-tiffin">User Tiffin Faq</option>
+              <option value="user-caterer">Customer Caterer Faq</option>
+              <option value="user-tiffin">Customer Tiffin Faq</option>
               <option value="vendor-caterer">Vendor Caterer Faq</option>
               <option value="vendor-tiffin">Vendor Tiffin Faq</option>
             </Form.Select>

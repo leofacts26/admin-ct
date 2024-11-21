@@ -130,6 +130,11 @@ const LeftNav = () => {
                                                     Social
                                                 </NavLink>
                                             </li>
+                                            <li className="nav-item">
+                                                <NavLink to="/faq" className="nav-link">
+                                                    Faq Management
+                                                </NavLink>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
@@ -179,11 +184,6 @@ const LeftNav = () => {
                                             <li className="nav-item">
                                                 <NavLink to="/food-types" className="nav-link">
                                                     Food Types
-                                                </NavLink>
-                                            </li>
-                                            <li className="nav-item">
-                                                <NavLink to="/faq" className="nav-link">
-                                                    Faq
                                                 </NavLink>
                                             </li>
                                         </ul>
@@ -413,7 +413,7 @@ const LeftNav = () => {
                                         <ul className="nav nav-sm flex-column">
                                             <li className="nav-item">
                                                 <NavLink to="/admin-list-users" className="nav-link">
-                                                    List Users
+                                                    Employee Master
                                                 </NavLink>
                                             </li>
                                             <li className="nav-item">

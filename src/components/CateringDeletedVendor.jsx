@@ -351,10 +351,10 @@ const CateringVendorDeletedList = () => {
       name: "Action",
       cell: (row) => (
         <>
-          <button className="btn btn-danger me-1"
+          <button className="btn btn-success me-1"
             onClick={() => handleEdit(row)}
           >
-            Delete
+            Restore
           </button>
         </>
       ),
@@ -405,7 +405,7 @@ const CateringVendorDeletedList = () => {
     }
 
     // console.log(data, "data");
-    
+
 
     if (editId === null) {
     } else {
@@ -426,7 +426,7 @@ const CateringVendorDeletedList = () => {
         <div className="row mb-4  me-2">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="header-title">
-              Total Inactive Caterer - {vandorDeleteList?.length}
+              Deleted Caterers - {vandorDeleteList?.length}
             </h1>
             <Button variant="primary" onClick={() => exportToExcel(formatDataForExport(), 'vendorlist')}>
               Export

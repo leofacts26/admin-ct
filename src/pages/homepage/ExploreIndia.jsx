@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import { setCuisineId } from '../../features/userSlice';
 import { FaCloudUploadAlt } from "react-icons/fa";
 import useUploadCusinePhotoos from '../../hooks/useUploadCusinePhotoos';
+import ImagePreviewColumn from '../../components/ImagePreviewColumn';
 
 
 const initialState = {
@@ -133,44 +134,14 @@ const ExploreIndia = () => {
     },
     {
       name: "Image Preview",
-      cell: row => (
-        row.image ? (
-          <>
-            <input
-              accept="image/*"
-              id="onUploadCityImage"
-              multiple
-              type="file"
-              style={{ display: 'none' }}
-              onChange={(e) => onUploadCityImage(e)}
-            />
-            <label htmlFor="onUploadCityImage">
-              <span variant="contained" component="span" style={{ cursor: 'pointer' }}
-                onClick={() => dispatch(setCuisineId(row?.id))}
-              >
-                <img onError={handleImageError} src={row?.image} style={{ width: '30px', borderRadius: '5px' }} alt="" className="img-fluid" />
-              </span>
-            </label>
-          </>
-        ) : (
-          <>
-            <input
-              accept="image/*"
-              id="onUploadCityImage"
-              multiple
-              type="file"
-              style={{ display: 'none' }}
-              onChange={(e) => onUploadCityImage(e)}
-            />
-            <label htmlFor="onUploadCityImage">
-              <span variant="contained" component="span" style={{ cursor: 'pointer' }}
-                onClick={() => dispatch(setCuisineId(row?.id))}
-              >
-                <FaCloudUploadAlt size={30} />
-              </span>
-            </label>
-          </>
-        )
+      cell: (row) => (
+        <ImagePreviewColumn
+          row={row}
+          dispatch={dispatch}
+          setCuisineId={setCuisineId}
+          onUploadCityImage={onUploadCityImage}
+          handleImageError={handleImageError}
+        />
       ),
       sortable: false,
     },

@@ -84,3 +84,38 @@ input:focus {
 .monthly-tag {
   background-color: #000000 !important;
 }
+
+
+
+/* Bigger Modal Title */
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+/* Style for the Close Button */
+.btn-close {
+  color: white; /* White cross icon */
+  border: none;
+  border-radius: 50%;
+  width: 4rem; /* Increase size */
+  height: 4rem; /* Increase size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.25rem; /* Increase icon size */
+  padding: 0;
+}
+
+.modal-body img {
+  max-width: 100%;
+  max-height: 80vh;
+  margin: 0 auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.modal-footer .btn-primary {
+  display: flex;
+  align-items: center;
+}

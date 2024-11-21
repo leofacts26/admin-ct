@@ -95,18 +95,18 @@ const MealTime = () => {
 
 
   const columns = [
-    {
-      name: "ID",
-      selector: row => row.id,
-      sortable: true,
-    },
+    // {
+    //   name: "ID",
+    //   selector: row => row.id,
+    //   sortable: true,
+    // },
     {
       name: "Name",
       selector: row => row.name,
       sortable: true,
     },
     {
-      name: "Cfreated At",
+      name: "Created at",
       selector: row => row.createdAt.slice(0, 10),
       sortable: true,
     },
@@ -190,7 +190,7 @@ const MealTime = () => {
               Total Meal Time List - {mealTypesList?.length}
             </h1>
             <button className='btn btn-primary fit-content' variant="primary" onClick={handleShow}>
-              Create Meal  Type
+              Create Meal Type
             </button>
           </div>
         </div>
@@ -218,8 +218,8 @@ const MealTime = () => {
 
       <Modal centered show={show} onHide={handleClose}>
         <form onSubmit={onHandleSubmit}>
-          <Modal.Header closeButton>
-            <Modal.Title> {editId ? 'Edit Meal' : 'Create Meal'} </Modal.Title>
+          <Modal.Header closeButton className="custom-modal-header">
+            <Modal.Title className="custom-modal-title"> {editId ? 'Edit Meal' : 'Create Meal'} </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="row">

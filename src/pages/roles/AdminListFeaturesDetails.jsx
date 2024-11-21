@@ -7,12 +7,14 @@ import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
 import { adminAssociateFeature, adminDeleteFeatureRole, adminListFeaturesForRoles, fetchFeaturesDisassociated } from '../../features/adminRoleSlice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 
 const AdminListFeaturesDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { adminFeaturesForRolesList, adminListFeaturesDisassociated, isLoading } = useSelector((state) => state.roleSlice)
 
@@ -149,23 +151,8 @@ const AdminListFeaturesDetails = () => {
 
   const columns = [
     {
-      name: "feature_id",
-      selector: row => row?.feature_id,
-      sortable: true,
-    },
-    {
       name: "feature_name",
       selector: row => row?.feature_name,
-      sortable: true,
-    },
-    {
-      name: "link",
-      selector: row => row?.link,
-      sortable: true,
-    },
-    {
-      name: "role id",
-      selector: row => row?.role_id,
       sortable: true,
     },
     {
@@ -177,39 +164,36 @@ const AdminListFeaturesDetails = () => {
       ),
       ignoreRowClick: true,
       allowOverflow: true,
-      button: true,
     },
-    {
-      name: "child display order",
-      selector: row => row?.child_display_order,
-      sortable: true,
-    },
-    {
-      name: "parent display order",
-      selector: row => row?.parent_display_order,
-      sortable: true,
-    },
-    {
-      name: "created by",
-      selector: row => row?.created_by,
-      sortable: true,
-    },
+
     {
       name: "is_menu",
-      selector: row => row?.is_menu,
+      cell: (row) => {
+        const isMenu = row?.is_menu === 1; // Check if `is_menu` is 1
+        const badgeClass = `badge mt-n1 ${isMenu ? "text-bg-popular-bage" : "text-bg-default-bage"
+          }`; // Assign classes based on the condition
+
+        return (
+          <span className={badgeClass}>
+            {isMenu ? "Yes" : "No"}
+          </span>
+        );
+      },
       sortable: true,
+      sortFunction: (a, b) => {
+        const isMenuA = a?.is_menu === 1 ? 1 : 0; // Convert to numeric value for sorting
+        const isMenuB = b?.is_menu === 1 ? 1 : 0;
+        return isMenuA - isMenuB; // Sort numerically
+      },
     },
+
+
     {
-      name: "updated at",
-      selector: row => row?.updated_at?.slice(0, 10),
-      sortable: true,
-    },
-    {
-      name: "Details",
+      name: "Action",
       cell: (row) => (
         <>
           <button className="btn btn-success me-1" style={{ fontSize: '12px' }} onClick={() => onHandleAdminDIsAssociateFeatureFOrRole(row)}>
-            DisAssociate
+            Remove
           </button>
         </>
       ),
@@ -220,35 +204,10 @@ const AdminListFeaturesDetails = () => {
   ];
 
   const columnsOne = [
-    {
-      name: "feature_id",
-      selector: row => row?.feature_id,
-      sortable: true,
-    },
+
     {
       name: "feature_name",
       selector: row => row?.feature_name,
-      sortable: true,
-    },
-    {
-      name: "is_menu",
-      selector: row => row?.is_menu,
-      sortable: true,
-    },
-    {
-      name: "link",
-      selector: row => row?.link,
-      sortable: true,
-    },
-    {
-      name: "is_active",
-      selector: row => row?.is_active,
-      sortable: true,
-    },
-
-    {
-      name: "parent_id",
-      selector: row => row?.parent_id,
       sortable: true,
     },
     {
@@ -257,26 +216,31 @@ const AdminListFeaturesDetails = () => {
       sortable: true,
     },
     {
-      name: "parent_display_order",
-      selector: row => row?.parent_display_order,
+      name: "is_menu",
+      cell: (row) => {
+        const isMenu = row?.is_menu === 1; // Check if `is_menu` is 1
+        const badgeClass = `badge mt-n1 ${isMenu ? "text-bg-popular-bage" : "text-bg-default-bage"
+          }`; // Assign classes based on the condition
+
+        return (
+          <span className={badgeClass}>
+            {isMenu ? "Yes" : "No"}
+          </span>
+        );
+      },
       sortable: true,
+      sortFunction: (a, b) => {
+        const isMenuA = a?.is_menu === 1 ? 1 : 0; // Convert to numeric value for sorting
+        const isMenuB = b?.is_menu === 1 ? 1 : 0;
+        return isMenuA - isMenuB; // Sort numerically
+      },
     },
     {
-      name: "child_display_order",
-      selector: row => row?.child_display_order,
-      sortable: true,
-    },
-    {
-      name: "created_at",
-      selector: row => row?.created_at.slice(0, 10),
-      sortable: true,
-    },
-    {
-      name: "Details",
+      name: "Action",
       cell: (row) => (
         <>
           <button className="btn btn-success me-1" style={{ fontSize: '12px' }} onClick={() => onHandleAssociateFeature(row)}>
-            Associate
+            Add
           </button>
         </>
       ),
@@ -290,9 +254,17 @@ const AdminListFeaturesDetails = () => {
   return (
     <>
       <div className="container-fluid my-5">
+
+        <div className="mb-4 cursor-pointer">
+          <button className="btn btn-success me-1" onClick={() => navigate(-1)}>
+            <IoMdArrowRoundBack /> Back
+          </button>
+        </div>
+
+
         <div className="row mb-4 me-2">
           <div className="d-flex justify-content-between">
-            <h2>Total Admin Role List - {adminFeaturesForRolesList?.length} </h2>
+            <h2> Total Features Associated for the Manager  - {adminFeaturesForRolesList?.length} </h2>
           </div>
         </div>
 
@@ -318,7 +290,7 @@ const AdminListFeaturesDetails = () => {
       <div className="container-fluid my-5">
         <div className="row mb-4 me-2">
           <div className="d-flex justify-content-between">
-            <h2>Total Admin DisAssociated List - {adminListFeaturesDisassociated?.length} </h2>
+            <h2> Other Features - {adminListFeaturesDisassociated?.length} </h2>
           </div>
         </div>
 
