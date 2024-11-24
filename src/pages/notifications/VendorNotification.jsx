@@ -80,11 +80,11 @@ const VendorNotification = () => {
   };
 
   const columns = [
-    {
-      name: "vendor ID",
-      selector: row => row.vendorID,
-      sortable: true,
-    },
+    // {
+    //   name: "vendor ID",
+    //   selector: row => row.vendorID,
+    //   sortable: true,
+    // },
     {
       name: "Company ID",
       selector: row => row.company_id,
@@ -109,6 +109,8 @@ const VendorNotification = () => {
       name: "message",
       selector: row => row.message,
       sortable: true,
+      wrap: true,
+      width: '250px',
     },
     {
       name: "created_at",
@@ -152,10 +154,10 @@ const VendorNotification = () => {
   }
 
   const receiverOptions = vendorNotificationList
-    ?.filter((item) => item && item.receiver_id && item.company_id) 
+    ?.filter((item) => item && item.receiver_id && item.company_id)
     .map((item) => ({
-      value: item.receiver_id, 
-      label: item.company_id,  
+      value: item.receiver_id,
+      label: item.company_id,
     }));
 
 

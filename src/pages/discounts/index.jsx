@@ -126,8 +126,29 @@ const Discounts = () => {
     // },
     {
       name: "Vendor Type",
-      selector: row => row.vendor_type,
-      sortable: true,
+      cell: (row) => {
+        let badgeClass = "badge"; // Common badge class
+        const vendorType = row.vendor_type ? row.vendor_type.toLowerCase() : ""; // Convert vendor_type to lowercase for comparison
+
+        // Assign specific badge class based on vendor type
+        switch (vendorType) {
+          case "caterer":
+            badgeClass += " text-bg-orange"; // Orange for Caterer
+            break;
+          case "tiffin":
+            badgeClass += " text-bg-normal-bage"; // Yellow for Tiffin
+            break;
+          default:
+            badgeClass += " text-bg-default-bage"; // Default color for unknown
+            break;
+        }
+
+        return (
+          <span className={badgeClass} style={{ textTransform: "capitalize" }}>
+            {row.vendor_type || "Unknown"}
+          </span>
+        );
+      },
     },
     {
       name: "Coupon Code",
@@ -136,32 +157,57 @@ const Discounts = () => {
     },
     {
       name: "Valid From",
-      selector: row => row.valid_from.slice(0,10),
+      selector: row => row.valid_from.slice(0, 10),
       sortable: true,
     },
     {
       name: "Valid Till",
-      selector: row => row.valid_till.slice(0,10),
+      selector: row => row.valid_till.slice(0, 10),
       sortable: true,
     },
     {
-      name: "coupon type",
+      name: "Coupon type",
       selector: row => row.coupon_type,
       sortable: true,
     },
     {
-      name: "discount_percent",
+      name: "Discount Percent",
       selector: row => row.discount_percent,
       sortable: true,
+      width: '160px'
     },
     {
-      name: "discount_price",
+      name: "Discount Price",
       selector: row => row.discount_price,
       sortable: true,
+      width: '140px'
     },
     {
       name: "Status",
-      selector: row => row.status,
+      cell: (row) => {
+        // Determine the class based on status
+        let badgeClass = "badge"; // Common badge class
+        const status = row.status ? row.status.toLowerCase() : ""; // Convert status to lowercase for comparison
+
+        // Assign specific badge class based on status
+        switch (status) {
+          case "active":
+            badgeClass += " text-bg-popular-bage"; // Green for Active
+            break;
+          case "expired":
+            badgeClass += " text-bg-default-bage"; // Red for Expired
+            break;
+          default:
+            badgeClass += " text-bg-branded-bage"; // Default color for unknown
+            break;
+        }
+
+        return (
+          <span className={badgeClass} style={{ textTransform: "capitalize" }}>
+            {row.status || "Unknown"}
+          </span>
+        );
+      },
       sortable: true,
     },
     {

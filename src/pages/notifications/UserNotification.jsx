@@ -99,6 +99,8 @@ const UserNotification = () => {
     {
       name: "message",
       selector: row => row.message,
+      wrap: true,
+      width: '300px',
       sortable: true,
     },
     // {

@@ -74,6 +74,10 @@ input:focus {
   background-color: #94121f !important;
 }
 
+.text-bg-orange {
+  background-color: orangered !important;
+}
+
 
 
 
@@ -83,6 +87,9 @@ input:focus {
 
 .monthly-tag {
   background-color: #000000 !important;
+}
+.gray-color {
+  background-color: gray !important;
 }
 
 

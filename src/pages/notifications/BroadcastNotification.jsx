@@ -81,9 +81,34 @@ const BroadcastNotification = () => {
 
   const columns = [
     {
-      name: "vendor_type",
-      selector: row => row.vendor_type,
-      sortable: true,
+      name: "Vendor Type",
+      cell: (row) => {
+        // Define badge class based on vendor type
+        let badgeClass = "badge mt-n1"; // Base class for the badge
+        const vendorType = row.vendor_type ? row.vendor_type.toLowerCase() : ""; // Convert to lowercase for comparison
+
+        // Assign classes based on vendor type
+        switch (vendorType) {
+          case "caterer":
+            badgeClass += " text-bg-orange"; // Orange
+            break;
+          case "tiffin":
+            badgeClass += " text-bg-normal-bage"; // Yellow
+            break;
+          case "user":
+            badgeClass += " annually-tag"; // Blue
+            break;
+          default:
+            badgeClass += " text-bg-secondary"; // Default for unknown
+            break;
+        }
+
+        return (
+          <span className={badgeClass} style={{ textTransform: "capitalize" }}>
+            {row.vendor_type || "Unknown"}
+          </span>
+        );
+      },
     },
     {
       name: "title",
@@ -94,23 +119,14 @@ const BroadcastNotification = () => {
       name: "message",
       selector: row => row.message,
       sortable: true,
+      wrap: true,
+      width: '300px',
     },
     {
       name: "created_at",
       selector: row => row.created_at.slice(0, 10),
       sortable: true,
     },
-    // {
-    //   name: "Action",
-    //   cell: (row) => (
-    //     <>
-    //       <span className='text-primary cursor-pointer' onClick={() => alert("test")}>View </span>
-    //     </>
-    //   ),
-    //   ignoreRowClick: true,
-    //   allowOverflow: true,
-    //   button: true,
-    // },
   ];
 
   const onHandleSubmit = async (e) => {
@@ -132,10 +148,10 @@ const BroadcastNotification = () => {
     <>
       <div className="container-fluid my-5">
 
-      <div className="row mb-4  me-2">
+        <div className="row mb-4  me-2">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="header-title">
-            Total Broadcast Notifications - {broadcastNotificationList?.length}
+              Total Broadcast Notifications - {broadcastNotificationList?.length}
             </h1>
             <button className='btn btn-primary fit-content' variant="primary" onClick={handleShow}>
               Create Broadcast Notifications
@@ -174,7 +190,7 @@ const BroadcastNotification = () => {
           <Modal.Body>
 
             <div>
-              <label htmlFor="vendor_type" className="form-label">Vendor Type</label>
+              <label htmlFor="vendor_type" className="form-label">Select Type</label>
               <select
                 required
                 name="type"
@@ -182,15 +198,16 @@ const BroadcastNotification = () => {
                 value={values.type}
                 onChange={(e) => setType(e.target.value)}
               >
-                <option value="">Select Vendor Type</option>
+                <option value="">Select Type</option>
                 <option value="Caterer">Caterer</option>
                 <option value="Tiffin">Tiffin</option>
+                <option value="User">User </option>
               </select>
             </div>
 
 
             {type && <div className='mt-3'>
-              <label for="name" className="form-label">subscription Types</label>
+              <label for="name" className="form-label">Subscription Types</label>
               <select
                 required
                 className="form-select"
