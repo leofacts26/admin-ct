@@ -10,6 +10,7 @@ import { Formik } from 'formik';
 import Button from 'react-bootstrap/Button';
 import ListBenifits from './ListBenifits';
 import ListBenifitsTiffin from './ListBenifitsTiffin';
+import Loader from '../../components/Loader';
 
 
 
@@ -308,6 +309,8 @@ const CreateSubscription = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

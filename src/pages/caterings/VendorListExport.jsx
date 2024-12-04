@@ -1,7 +1,7 @@
 
 
 
-
+import { format, parse, isValid, compareAsc } from 'date-fns';
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import Button from 'react-bootstrap/Button';
@@ -13,16 +13,35 @@ import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
 import useExportData from '../../hooks/useExportData';
 import moment from 'moment/moment';
-
+import Loader from '../../components/Loader';
+import DatePicker from 'react-datepicker'; // Import DatePicker
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 const VendorListExport = () => {
   const dispatch = useDispatch()
-  const { vandorExportList } = useSelector((state) => state.catering)
+  const { vandorExportList, isLoading } = useSelector((state) => state.catering)
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const { exportToExcel } = useExportData();
-  const [searchValues, setSearchValues] = useState({});
+  // const [searchValues, setSearchValues] = useState({});
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+
+  // State to store search values for each column
+  const [searchValues, setSearchValues] = useState({
+    company_id: "",
+    vendor_service_name: "",
+    phone_number: "",
+    city: "",
+    plan_type_name: "",
+    subscription_text: "",
+    start_date: "",
+    end_date: "",
+    final_status_description: "",
+    final_status: "",
+  });
 
 
   useEffect(() => {
@@ -74,23 +93,68 @@ const VendorListExport = () => {
   }, [vandorExportList]);
 
 
+  const handleSearch = (column, value) => {
+    const newSearchValues = { ...searchValues, [column]: value };
+    setSearchValues(newSearchValues);
 
-  const handleSearch = (e) => {
-    const value = e.target.value.toLowerCase();
-  
-    // Update searchValues only with global search text
-    setSearchValues(value);
-  
     const newFilteredData = data.filter((row) => {
-      // Check if any value in the row contains the search term
-      return Object.values(row).some((field) => 
-        field?.toString().toLowerCase().includes(value)
-      );
+      return Object.keys(newSearchValues).every((key) => {
+        const searchValue = newSearchValues[key].trim();
+
+        // If no search value for this column, skip filtering
+        if (!searchValue) return true;
+
+        // Handle date filtering manually for start_date and end_date
+        if (key === "start_date" || key === "end_date") {
+          const rowDateString = row.subscription_date || ''; // Use actual date field from your data, handle if it's undefined or null
+          const rowDate = parse(rowDateString, 'MM/dd/yyyy', new Date()); // Parse the row date in MM/DD/YYYY format
+
+          // Ensure the row date is valid
+          if (!isValid(rowDate)) return false;
+
+          // Parse the search input as a date in MM/DD/YYYY format
+          const searchDate = parse(searchValue, 'MM/dd/yyyy', new Date());
+
+          // Ensure the search input date is valid
+          if (!isValid(searchDate)) return false;
+
+          // For start_date, only include rows with dates after or equal to the start_date
+          if (key === "start_date") {
+            return compareAsc(rowDate, searchDate) >= 0; // Compare rowDate with searchDate
+          }
+
+          // For end_date, only include rows with dates before or equal to the end_date
+          if (key === "end_date") {
+            return compareAsc(rowDate, searchDate) <= 0; // Compare rowDate with searchDate
+          }
+        }
+
+        // Handle normal string filtering for non-date columns
+        const rowValue = (row[key] || '').toString().toLowerCase(); // Ensure row[key] is always a string
+        return rowValue.includes(searchValue.toLowerCase());
+      });
     });
-  
+
     setFilteredData(newFilteredData);
   };
-  
+
+
+  // const handleSearch = (e) => {
+  //   const value = e.target.value.toLowerCase();
+
+  //   // Update searchValues only with global search text
+  //   setSearchValues(value);
+
+  //   const newFilteredData = data.filter((row) => {
+  //     // Check if any value in the row contains the search term
+  //     return Object.values(row).some((field) =>
+  //       field?.toString().toLowerCase().includes(value)
+  //     );
+  //   });
+
+  //   setFilteredData(newFilteredData);
+  // };
+
 
   const columns = [
     // {
@@ -259,7 +323,7 @@ const VendorListExport = () => {
 
       // Loop through each column and get the value using the selector function
       columns.forEach((col) => {
-          formattedRow[col.name] = col.selector ? col.selector(row) : row[col.name];
+        formattedRow[col.name] = col.selector ? col.selector(row) : row[col.name];
       });
 
       // formattedRow['Plan Type'] = row.plan_type_name ? row.plan_type_name : "Unknown Vendor Type"; // Add vendor type
@@ -287,8 +351,142 @@ const VendorListExport = () => {
         </div>
         <hr />
 
+
         <div className="card">
-          <GlobalSearch handleSearch={handleSearch} /> 
+          {/* <GlobalSearch handleSearch={handleSearch} /> */}
+
+          {/* Add a single row for column-based searches */}
+          <div className="table-search-row mb-0">
+            <div className="row p-3">
+              <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.company_id}
+                  onChange={(e) => handleSearch("company_id", e.target.value)}
+                  placeholder="Company ID"
+                  className="form-control"
+                />
+              </div>
+              <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.vendor_service_name}
+                  onChange={(e) => handleSearch("vendor_service_name", e.target.value)}
+                  placeholder="Business Name"
+                  className="form-control"
+                />
+              </div>
+              <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.phone_number}
+                  onChange={(e) => handleSearch("phone_number", e.target.value)}
+                  placeholder="Phone"
+                  className="form-control"
+                />
+              </div>
+              <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.city}
+                  onChange={(e) => handleSearch("city", e.target.value)}
+                  placeholder="City"
+                  className="form-control"
+                />
+              </div>
+              <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.plan_type_name}
+                  onChange={(e) => handleSearch("plan_type_name", e.target.value)}
+                  placeholder="Plan Type"
+                  className="form-control"
+                />
+              </div>
+              <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.subscription_text}
+                  onChange={(e) => handleSearch("subscription_text", e.target.value)}
+                  placeholder="Subscription"
+                  className="form-control"
+                />
+              </div>
+
+              {/* <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.start_date}
+                  onChange={(e) => handleSearch("start_date", e.target.value)}
+                  placeholder="Start Date (MM/DD/YYYY)"
+                  className="form-control"
+                />
+              </div>
+              <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.end_date}
+                  onChange={(e) => handleSearch("end_date", e.target.value)}
+                  placeholder="End Date (MM/DD/YYYY)"
+                  className="form-control"
+                />
+              </div> */}
+
+              <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.final_status_description}
+                  onChange={(e) => handleSearch("final_status_description", e.target.value)}
+                  placeholder="Status Description"
+                  className="form-control"
+                />
+              </div>
+              <div className="col-lg-3 mb-2">
+                <input
+                  type="text"
+                  value={searchValues.final_status}
+                  onChange={(e) => handleSearch("final_status", e.target.value)}
+                  placeholder="Is Active"
+                  className="form-control"
+                />
+              </div>
+            </div>
+
+            <div className="mb-3 ps-3 d-flex justify-content-start">
+              <div className='me-4'>
+                {/* <label className='me-2'>Start Date</label> */}
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  showYearDropdown
+                  scrollableYearDropdown
+                  yearDropdownItemNumber={50}
+                  placeholderText="Select start date"
+                  dateFormat="dd/MM/yyyy"
+                  className="form-control"
+                  popperClassName="higher-zindex"
+                />
+              </div>
+              <div className="">
+                {/* <label className='me-2'>End Date</label> */}
+                <DatePicker
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                  showYearDropdown
+                  scrollableYearDropdown
+                  yearDropdownItemNumber={50}
+                  placeholderText="Select end date"
+                  dateFormat="dd/MM/yyyy"
+                  className="form-control"
+                  popperClassName="higher-zindex"
+                />
+              </div>
+            </div>
+
+          </div>
+
+
+
           <DataTable
             columns={columns}
             data={filteredData}
@@ -298,8 +496,25 @@ const VendorListExport = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
-          // title="React-Data-Table-Component Tutorial."
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
+        </div>
+
+        <div className="card">
+          {/* <GlobalSearch handleSearch={handleSearch} /> */}
+          {/* <DataTable
+            columns={columns}
+            data={filteredData}
+            paginationRowsPerPageOptions={[50, 100, 300, 500, 1000]}
+            paginationPerPage="100"
+            fixedHeader
+            pagination
+            selectableRows
+            customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
+          /> */}
         </div>
       </div>
 

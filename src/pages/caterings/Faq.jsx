@@ -9,6 +9,7 @@ import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { cater_Faq_type } from '../../constants';
 import Form from 'react-bootstrap/Form';
+import Loader from '../../components/Loader';
 
 
 const vendorFaqState = {
@@ -248,6 +249,8 @@ const Faq = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

@@ -8,6 +8,7 @@ import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { fetchSubscriptionData } from '../../features/subscriptionSlice';
 import Select from 'react-select';
+import Loader from '../../components/Loader';
 
 
 
@@ -90,14 +91,19 @@ const VendorNotification = () => {
       selector: row => row.company_id,
       sortable: true,
     },
-    {
-      name: "vendor Service Name",
-      selector: row => row.vendor_service_name,
-      sortable: true,
-    },
+    // {
+    //   name: "vendor Service Name",
+    //   selector: row => row.vendor_service_name,
+    //   sortable: true,
+    // },
     {
       name: "Vendor Type",
       selector: row => row.type,
+      sortable: true,
+    },
+    {
+      name: "created_at",
+      selector: row => row.created_at.slice(0, 10),
       sortable: true,
     },
     {
@@ -111,11 +117,6 @@ const VendorNotification = () => {
       sortable: true,
       wrap: true,
       width: '250px',
-    },
-    {
-      name: "created_at",
-      selector: row => row.created_at.slice(0, 10),
-      sortable: true,
     },
     // {
     //   name: "Action",
@@ -194,6 +195,8 @@ const VendorNotification = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
         <hr />

@@ -16,6 +16,7 @@ import DatePicker from 'react-datepicker'; // Import DatePicker
 import 'react-datepicker/dist/react-datepicker.css';
 import { format, parse, isValid, compareAsc } from 'date-fns';
 import CateringVendorDeletedList from '../../components/CateringDeletedVendor';
+import Loader from '../../components/Loader';
 
 
 const initialState = {
@@ -424,7 +425,7 @@ const VendorList = () => {
         <div className="row mb-4  me-2">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="header-title">
-            Total Caterers - {cateringVendors?.length}
+              Total Caterers - {cateringVendors?.length}
             </h1>
             <Button variant="primary" onClick={() => exportToExcel(formatDataForExport(), 'vendorlist')}>
               Export
@@ -631,6 +632,8 @@ const VendorList = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

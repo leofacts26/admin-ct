@@ -7,18 +7,19 @@ import { createCouponList, fetchCouponList, updateCouponList } from '../../featu
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
+import Loader from '../../components/Loader';
 
 
 const initialState = {
   discount_name: '',
-  vendor_type: '',
+  vendor_type: '',  
   coupon_code: '',
   valid_from: '',
   valid_till: '',
   status: '',
   coupon_type: '',
-  discount_percent: '',
-  discount_price: '',
+  discount_percent: '0',
+  discount_price: '0',
 }
 
 
@@ -167,7 +168,30 @@ const Discounts = () => {
     },
     {
       name: "Coupon type",
-      selector: row => row.coupon_type,
+      cell: (row) => {
+        // Determine the class based on status
+        let badgeClass = "badge"; // Common badge class
+        const status = row.coupon_type ? row.coupon_type.toLowerCase() : ""; // Convert status to lowercase for comparison
+
+        // Assign specific badge class based on status
+        switch (status) {
+          case "regular":
+            badgeClass += " annually-tag"; // Green for Active
+            break;
+          case "trial":
+            badgeClass += " gray-color"; // Red for Expired
+            break;
+          default:
+            badgeClass += " gray-color"; // Default color for unknown
+            break;
+        }
+
+        return (
+          <span className={badgeClass} style={{ textTransform: "capitalize" }}>
+            {row.coupon_type || "Unknown"}
+          </span>
+        );
+      },
       sortable: true,
     },
     {
@@ -364,6 +388,8 @@ const Discounts = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
 
@@ -410,8 +436,8 @@ const Discounts = () => {
                   <label htmlFor="name" className="form-label">Vendor Type</label>
                   <select className="form-select" name="vendor_type" value={values.vendor_type} onChange={onHandleChange}>
                     <option value="">Select an option</option>
-                    <option value="user-caterer">Caterer</option>
-                    <option value="user-tiffin">Tiffin</option>
+                    <option value="caterer">Caterer</option>
+                    <option value="tiffin">Tiffin</option>
                   </select>
 
                 </div>

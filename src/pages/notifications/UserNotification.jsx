@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import Select from 'react-select';
+import Loader from '../../components/Loader';
 
 
 
@@ -180,6 +181,8 @@ const UserNotification = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
         <hr />

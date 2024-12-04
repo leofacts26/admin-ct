@@ -8,6 +8,7 @@ import { fetchNewsletter } from '../../features/homepage/homeSlice';
 import * as XLSX from "xlsx";
 import GlobalSearch from '../../components/common/GlobalSearch';
 import useExportData from '../../hooks/useExportData';
+import Loader from '../../components/Loader';
 
 
 const NewsLetter = () => {
@@ -104,6 +105,8 @@ const NewsLetter = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
 

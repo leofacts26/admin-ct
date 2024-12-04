@@ -13,6 +13,7 @@ import { format, parse, isValid, compareAsc } from 'date-fns';
 import useExportData from '../hooks/useExportData';
 import { fetchCateringDeletedVendors, fetchCateringVendors, setVendorListId, updateCateringDeletedVendorsStatus } from '../features/catering/cateringSlice';
 import { tableCustomStyles } from './tableCustomStyles';
+import Loader from './Loader';
 
 
 
@@ -581,6 +582,8 @@ const CateringVendorDeletedList = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

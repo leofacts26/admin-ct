@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { fetchSubscriptionData, fetchSubscriptionTypeCaterer } from '../../features/subscriptionSlice';
+import Loader from '../../components/Loader';
 
 
 
@@ -25,6 +26,8 @@ const BroadcastNotification = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [type, setType] = useState("")
+
+  console.log(type, "typetypetype")
 
 
   const [show, setShow] = useState(false);
@@ -175,6 +178,8 @@ const BroadcastNotification = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
         <hr />
@@ -206,7 +211,7 @@ const BroadcastNotification = () => {
             </div>
 
 
-            {type && <div className='mt-3'>
+            {type && type !== 'User' && <div className='mt-3'>
               <label for="name" className="form-label">Subscription Types</label>
               <select
                 required

@@ -82,7 +82,7 @@ const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, ha
                 src={selectedImage}
                 alt="Preview"
                 className="img-fluid"
-                style={{ maxHeight: "80vh", borderRadius: "5px" }}
+                style={{ maxHeight: "auto", width: '100%', borderRadius: "5px" }}
               />
             </div>
           )}
@@ -107,9 +107,6 @@ const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, ha
               </Button>
             </>
           )}
-          <Button variant="secondary" onClick={handleClosePreview}>
-            Close
-          </Button>
         </Modal.Footer>
       </Modal>
     </>

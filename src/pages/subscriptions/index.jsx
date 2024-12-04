@@ -10,6 +10,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Modal, Button } from 'react-bootstrap';
 import useExportData from '../../hooks/useExportData';
 import { MdDelete } from "react-icons/md";
+import Loader from '../../components/Loader';
 
 
 const Subscription = () => {
@@ -510,8 +511,8 @@ const Subscription = () => {
             fixedHeader
             pagination
             selectableRows
-            customStyles={tableCustomStyles}
-            progressPending={isLoading} // Show loader if data is still loading
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

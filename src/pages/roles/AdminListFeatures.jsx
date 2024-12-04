@@ -8,6 +8,7 @@ import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
 import { createAdminFeature, createAdminROle, fetchAdminListFuture, onHandledeleteFeatures, updateAdminFeature, updateAdminRole, updateToggleAdminFeatures, updateToggleAdminRolesRanges } from '../../features/adminRoleSlice';
 import { MdDelete } from "react-icons/md";
+import Loader from '../../components/Loader';
 
 
 const initialState = {
@@ -302,7 +303,9 @@ const AdminListFeatures = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
-            conditionalRowStyles={conditionalRowStyles}  // Add the conditionalRowStyles prop
+            conditionalRowStyles={conditionalRowStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

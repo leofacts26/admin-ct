@@ -10,6 +10,7 @@ import { FaEdit } from "react-icons/fa";
 import { fetchCateringVendors } from '../../features/catering/cateringSlice';
 import { cater_vendor_type } from '../../constants';
 import Select from 'react-select';
+import Loader from '../../components/Loader';
 
 
 const initialState = {
@@ -168,8 +169,31 @@ const SingleVendorDiscounts = () => {
       },
     },
     {
-      name: "Coupon Code",
-      selector: row => row.coupon_code,
+      name: "Coupon type",
+      cell: (row) => {
+        // Determine the class based on status
+        let badgeClass = "badge"; // Common badge class
+        const status = row.coupon_type ? row.coupon_type.toLowerCase() : ""; // Convert status to lowercase for comparison
+
+        // Assign specific badge class based on status
+        switch (status) {
+          case "regular":
+            badgeClass += " annually-tag"; // Green for Active
+            break;
+          case "trial":
+            badgeClass += " gray-color"; // Red for Expired
+            break;
+          default:
+            badgeClass += " gray-color"; // Default color for unknown
+            break;
+        }
+
+        return (
+          <span className={badgeClass} style={{ textTransform: "capitalize" }}>
+            {row.coupon_type || "Unknown"}
+          </span>
+        );
+      },
       sortable: true,
     },
     {
@@ -414,6 +438,8 @@ const SingleVendorDiscounts = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
 

@@ -9,6 +9,7 @@ import { FaEdit } from "react-icons/fa";
 import { adminAssociateFeature, adminDeleteFeatureRole, adminListFeaturesForRoles, fetchFeaturesDisassociated } from '../../features/adminRoleSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import Loader from '../../components/Loader';
 
 
 
@@ -16,7 +17,7 @@ const AdminListFeaturesDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { adminFeaturesForRolesList, adminListFeaturesDisassociated, isLoading } = useSelector((state) => state.roleSlice)
+  const { adminFeaturesForRolesList, adminListFeaturesDisassociated, isLoading, roleName } = useSelector((state) => state.roleSlice)
 
   // console.log(adminListFeaturesDisassociated, "adminListFeaturesDisassociated");
 
@@ -192,7 +193,7 @@ const AdminListFeaturesDetails = () => {
       name: "Action",
       cell: (row) => (
         <>
-          <button className="btn btn-success me-1" style={{ fontSize: '12px' }} onClick={() => onHandleAdminDIsAssociateFeatureFOrRole(row)}>
+          <button className="btn btn-danger me-1" style={{ fontSize: '12px' }} onClick={() => onHandleAdminDIsAssociateFeatureFOrRole(row)}>
             Remove
           </button>
         </>
@@ -264,7 +265,7 @@ const AdminListFeaturesDetails = () => {
 
         <div className="row mb-4 me-2">
           <div className="d-flex justify-content-between">
-            <h2> Total Features Associated for the Manager  - {adminFeaturesForRolesList?.length} </h2>
+            <h2> Total Features Associated for the {roleName}  - {adminFeaturesForRolesList?.length} </h2>
           </div>
         </div>
 
@@ -279,6 +280,8 @@ const AdminListFeaturesDetails = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>
@@ -305,6 +308,8 @@ const AdminListFeaturesDetails = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

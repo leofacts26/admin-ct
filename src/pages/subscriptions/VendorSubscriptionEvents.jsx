@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { fetchVendorSubscriptionEvents } from '../../features/subscriptionSlice';
+import Loader from '../../components/Loader';
 
 
 
@@ -130,6 +131,8 @@ const VendorSubscriptionEvents = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

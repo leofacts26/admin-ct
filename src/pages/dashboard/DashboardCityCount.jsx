@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import DataTable from 'react-data-table-component';
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { fetchAdminDashboardCityCount } from '../../features/dashboardSlice';
+import Loader from '../../components/Loader';
 
 const DashboardCityCount = () => {
   const dispatch = useDispatch();
-  const { dashboardCityCount } = useSelector((state) => state.dashboardSlice);
-  
+  const { dashboardCityCount, isLoading } = useSelector((state) => state.dashboardSlice);
+
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
@@ -55,7 +56,7 @@ const DashboardCityCount = () => {
     }
     return badgeClass;
   };
-  
+
 
   // Define table columns
   const columns = [
@@ -100,6 +101,8 @@ const DashboardCityCount = () => {
           paginationPerPage="50"
           fixedHeader
           pagination
+          progressPending={isLoading}
+          progressComponent={<Loader />}
         />
       </div>
     </div>
@@ -179,7 +182,7 @@ export default DashboardCityCount;
 
 //   const options = {
 //     responsive: true,
-//     maintainAspectRatio: false, 
+//     maintainAspectRatio: false,
 //     aspectRatio: 2,
 //     plugins: {
 //       legend: {

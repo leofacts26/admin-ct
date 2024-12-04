@@ -6,11 +6,12 @@ import { fetchUserData } from '../../features/userSlice';
 import Heading from '../../components/common/Heading';
 import useExportData from '../../hooks/useExportData';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
+import Loader from '../../components/Loader';
 
 
 const Users = () => {
   const dispatch = useDispatch()
-  const { userList } = useSelector((state) => state.users)
+  const { userList, isLoading } = useSelector((state) => state.users)
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const { exportToExcel } = useExportData()
@@ -117,6 +118,8 @@ const Users = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

@@ -9,6 +9,7 @@ const initialState = {
   adminFeatureRoleList: [],
   adminFeaturesForRolesList: [],
   adminListFeaturesDisassociated: [],
+  roleName: ''
 }
 
 
@@ -251,7 +252,9 @@ export const adminRoleSlice = createSlice({
   name: 'roleSlice',
   initialState,
   reducers: {
-
+    setListRoleName: (state, action) => {
+      state.roleName = action.payload;
+  },
   },
   extraReducers: (builder) => {
     builder
@@ -383,6 +386,6 @@ export const adminRoleSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { } = adminRoleSlice.actions
+export const { setListRoleName } = adminRoleSlice.actions
 
 export default adminRoleSlice.reducer

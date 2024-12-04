@@ -12,6 +12,7 @@ import Modal from 'react-bootstrap/Modal';
 import { FaEdit } from "react-icons/fa";
 import Select from 'react-select';
 import { fetchAdminRoleListData } from '../../features/adminRoleSlice';
+import Loader from '../../components/Loader';
 
 
 
@@ -317,6 +318,8 @@ const AdminListUsers = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>
@@ -344,7 +347,7 @@ const AdminListUsers = () => {
                 <input type="text" className="form-control" placeholder="email@gmail.com" name="email" required onChange={handleChange} value={values.email} />
               </div>
               <div className='col-12 mt-4'>
-                <label htmlFor="receiverId" className="form-label"><b>User Phonenumber</b></label>
+                <label htmlFor="receiverId" className="form-label"><b>Role</b></label>
                 <Select
                   options={receiverOptions}
                   onChange={(selectedOption) =>

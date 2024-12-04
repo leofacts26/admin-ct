@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
-import { adminListFeaturesForRoles, createAdminROle, fetchAdminRoleListData, updateAdminRole, updateToggleAdminRolesRanges } from '../../features/adminRoleSlice';
+import { adminListFeaturesForRoles, createAdminROle, fetchAdminRoleListData, setListRoleName, updateAdminRole, updateToggleAdminRolesRanges } from '../../features/adminRoleSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import Loader from '../../components/Loader';
 
 
 const initialState = {
@@ -134,9 +135,10 @@ const AdminListRoles = () => {
       name: "Details",
       cell: (row) => (
         <>
-          <a className="btn btn-success me-1" href={`/admin-list-roles-details/${row?.role_id}`}>
+          <Link className="btn btn-success me-1" to={`/admin-list-roles-details/${row?.role_id}`}
+            onClick={() => dispatch(setListRoleName(row?.role_name))}>
             View
-          </a>
+          </Link>
         </>
       ),
       ignoreRowClick: true,
@@ -205,7 +207,7 @@ const AdminListRoles = () => {
         <div className="row mb-4  me-2">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="header-title">
-            Total Role List - {adminRoleList?.length}
+              Total Role List - {adminRoleList?.length}
             </h1>
             <button className='btn btn-primary fit-content' variant="primary" onClick={handleShow}>
               Create Role
@@ -226,6 +228,8 @@ const AdminListRoles = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

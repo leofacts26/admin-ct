@@ -7,6 +7,7 @@ import { adminUpdateSubscriptionBenifit, fetchRzrazorpayPlans } from '../../feat
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
+import Loader from '../../components/Loader';
 
 const initialState = {
   benifit: '',
@@ -142,6 +143,8 @@ const ListBenifits = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

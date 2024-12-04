@@ -14,6 +14,7 @@ import { setCuisineId } from '../../features/userSlice';
 import { FaCloudUploadAlt } from "react-icons/fa";
 import useUploadCusinePhotoos from '../../hooks/useUploadCusinePhotoos';
 import ImagePreviewColumn from '../../components/ImagePreviewColumn';
+import Loader from '../../components/Loader';
 
 
 const initialState = {
@@ -245,6 +246,8 @@ const ExploreIndia = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
 

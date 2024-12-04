@@ -16,6 +16,7 @@ import DatePicker from 'react-datepicker'; // Import DatePicker
 import 'react-datepicker/dist/react-datepicker.css';
 import { format, parse, isValid, compareAsc } from 'date-fns';
 import TiffinDeletedVendor from '../../components/TiffinDeletedVendor';
+import Loader from '../../components/Loader';
 
 
 
@@ -581,6 +582,8 @@ const TiffinVendorList = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>

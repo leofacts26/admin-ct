@@ -9,6 +9,7 @@ import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
 import { cater_vendor_type } from '../../constants';
 import { createMealTime, fetchMealTypes, updateMealTime, updateToggleMealTime } from '../../features/catering/mealSlice';
+import Loader from '../../components/Loader';
 
 
 // const rows = [
@@ -209,6 +210,8 @@ const MealTime = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

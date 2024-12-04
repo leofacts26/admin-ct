@@ -13,12 +13,13 @@ import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
 import useExportData from '../../hooks/useExportData';
 import moment from 'moment/moment';
+import Loader from '../../components/Loader';
 
 
 
 const TiffinListExport = () => {
   const dispatch = useDispatch()
-  const { vandorExportList } = useSelector((state) => state.catering)
+  const { vandorExportList, isLoading } = useSelector((state) => state.catering)
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const { exportToExcel } = useExportData();
@@ -298,6 +299,8 @@ const TiffinListExport = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

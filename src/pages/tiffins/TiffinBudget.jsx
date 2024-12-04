@@ -8,6 +8,7 @@ import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
 import { tiffin_vendor_type } from '../../constants';
+import Loader from '../../components/Loader';
 
 
 // const rows = [
@@ -212,6 +213,8 @@ const TiffinBudjet = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

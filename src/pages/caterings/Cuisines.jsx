@@ -13,6 +13,7 @@ import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { setCuisineId } from '../../features/userSlice';
 import useToggle from '../../hooks/useToggle';
 import { fetchexplorecitiesData, updateToggleExplorecity } from '../../features/homepage/homeSlice';
+import Loader from '../../components/Loader';
 
 
 
@@ -464,6 +465,8 @@ const Cuisines = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>
@@ -483,6 +486,8 @@ const Cuisines = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

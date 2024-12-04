@@ -5,12 +5,13 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { fetchAdminDashboardAreaCount } from '../../features/dashboardSlice';
+import Loader from '../../components/Loader';
 
 
 
 const DashboardAreaCountChart = () => {
   const dispatch = useDispatch();
-  const { dashboardAreaCount } = useSelector((state) => state.dashboardSlice);
+  const { dashboardAreaCount, isLoading } = useSelector((state) => state.dashboardSlice);
 
 
   const [data, setData] = useState([]);
@@ -60,7 +61,7 @@ const DashboardAreaCountChart = () => {
     }
     return badgeClass;
   };
-  
+
 
   const columns = [
     {
@@ -109,6 +110,8 @@ const DashboardAreaCountChart = () => {
           paginationPerPage="50"
           fixedHeader
           pagination
+          progressPending={isLoading}
+          progressComponent={<Loader />}
         />
       </div>
     </div>

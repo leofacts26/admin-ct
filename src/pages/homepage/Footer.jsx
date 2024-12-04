@@ -9,6 +9,7 @@ import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
 import { cater_vendor_type } from '../../constants';
 import { createFooter, fetchFooterData, updateFooter, updateToggleFooter } from '../../features/footerSlice';
+import Loader from '../../components/Loader';
 
 
 const initialState = {
@@ -348,6 +349,8 @@ const Footer = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

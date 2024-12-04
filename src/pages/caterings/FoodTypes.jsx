@@ -7,12 +7,13 @@ import { fetchCateringFoodTypes } from '../../features/catering/cateringSlice';
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
+import Loader from '../../components/Loader';
 
 
 
 const FoodTypes = () => {
   const dispatch = useDispatch()
-  const { cateringFoodTypes } = useSelector((state) => state.catering)
+  const { cateringFoodTypes, isLoading } = useSelector((state) => state.catering)
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [show, setShow] = useState(false);
@@ -149,6 +150,8 @@ const FoodTypes = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

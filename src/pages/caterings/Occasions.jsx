@@ -10,6 +10,7 @@ import { FaEdit } from "react-icons/fa";
 import { FaCloudUploadAlt } from "react-icons/fa";
 // import { updatePriceRanges } from '../../features/catering/priceSlice';
 import useUploadOccasionPhotoos from '../../hooks/useUploadOccasionPhotos';
+import Loader from '../../components/Loader';
 // import { updateToggleOccasion } from '../../features/catering/cateringFaq';
 
 
@@ -251,6 +252,8 @@ const Occasions = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

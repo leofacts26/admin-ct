@@ -9,6 +9,7 @@ import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
 import { cater_vendor_type } from '../../constants';
 import { fetchSocialData, updateSocialData } from '../../features/footerSlice';
+import Loader from '../../components/Loader';
 
 
 const initialState = {
@@ -172,14 +173,14 @@ const Social = () => {
         <div className="row mb-4  me-2">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="header-title">
-            Total Social List - {socialList?.length} 
+              Total Social List - {socialList?.length}
             </h1>
           </div>
         </div>
         <hr />
 
 
-       
+
 
         <div className="card">
           <GlobalSearch handleSearch={handleSearch} />
@@ -192,6 +193,8 @@ const Social = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           // title="React-Data-Table-Component Tutorial."
           />
         </div>

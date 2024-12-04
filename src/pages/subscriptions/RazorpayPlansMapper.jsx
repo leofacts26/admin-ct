@@ -6,6 +6,7 @@ import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { createRazorpayPlansMapper, fetchRazorpayPlansMapper, fetchSubscriptionTypeCaterer, updateRazorpayPlansMapper } from '../../features/subscriptionSlice';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Loader from '../../components/Loader';
 
 const initialState = {
   subscription_type_id: '',
@@ -156,6 +157,8 @@ const RazorpayPlansMapper = () => {
             pagination
             selectableRows
             customStyles={tableCustomStyles}
+            progressPending={isLoading}
+            progressComponent={<Loader />}
           />
         </div>
       </div>
