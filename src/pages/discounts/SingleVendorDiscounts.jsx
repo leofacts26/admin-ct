@@ -169,34 +169,6 @@ const SingleVendorDiscounts = () => {
       },
     },
     {
-      name: "Coupon type",
-      cell: (row) => {
-        // Determine the class based on status
-        let badgeClass = "badge"; // Common badge class
-        const status = row.coupon_type ? row.coupon_type.toLowerCase() : ""; // Convert status to lowercase for comparison
-
-        // Assign specific badge class based on status
-        switch (status) {
-          case "regular":
-            badgeClass += " annually-tag"; // Green for Active
-            break;
-          case "trial":
-            badgeClass += " gray-color"; // Red for Expired
-            break;
-          default:
-            badgeClass += " gray-color"; // Default color for unknown
-            break;
-        }
-
-        return (
-          <span className={badgeClass} style={{ textTransform: "capitalize" }}>
-            {row.coupon_type || "Unknown"}
-          </span>
-        );
-      },
-      sortable: true,
-    },
-    {
       name: "Valid From",
       selector: row => row.valid_from.slice(0, 10),
       sortable: true,

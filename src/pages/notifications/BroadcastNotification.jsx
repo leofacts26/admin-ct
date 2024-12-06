@@ -114,6 +114,11 @@ const BroadcastNotification = () => {
       },
     },
     {
+      name: "created_at",
+      selector: row => row.created_at.slice(0, 10),
+      sortable: true,
+    },
+    {
       name: "title",
       selector: row => row.title,
       sortable: true,
@@ -124,11 +129,6 @@ const BroadcastNotification = () => {
       sortable: true,
       wrap: true,
       width: '300px',
-    },
-    {
-      name: "created_at",
-      selector: row => row.created_at.slice(0, 10),
-      sortable: true,
     },
   ];
 

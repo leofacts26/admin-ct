@@ -93,6 +93,11 @@ const UserNotification = () => {
       sortable: true,
     },
     {
+      name: "created_at",
+      selector: row => row.created_at.slice(0, 10),
+      sortable: true,
+    },
+    {
       name: "title",
       selector: row => row.title,
       sortable: true,
@@ -109,11 +114,6 @@ const UserNotification = () => {
     //   selector: row => row.type,
     //   sortable: true,
     // },
-    {
-      name: "created_at",
-      selector: row => row.created_at.slice(0, 10),
-      sortable: true,
-    },
     // {
     //   name: "Action",
     //   cell: (row) => (

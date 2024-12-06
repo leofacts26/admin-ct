@@ -78,6 +78,7 @@ const AdminListUsers = () => {
         city: user.city,
         country: user.country,
         role_id: user.role_id,
+        created_at: user.created_at
       }));
       setData(formattedData);
       setFilteredData(formattedData);
@@ -101,6 +102,7 @@ const AdminListUsers = () => {
         row?.state?.toLowerCase().includes(searchValue) ||
         row?.formatted_address?.toLowerCase().includes(searchValue) ||
         row?.city?.toLowerCase().includes(searchValue) ||
+        row?.created_at?.toLowerCase().includes(searchValue) ||
         row?.country?.toLowerCase().includes(searchValue)
       );
     });
@@ -132,54 +134,60 @@ const AdminListUsers = () => {
       name: "ID",
       selector: (row) => row.id,
       sortable: true,
+       width: '100px'
     },
     {
-      name: "Name",
+      name: "Role",
       selector: (row) => row.name,
       sortable: true,
-      width: '150px'
-    },
-    {
-      name: "Email",
-      selector: (row) => row.email,
-      sortable: true,
-       width: '150px'
+      // width: '150px'
     },
     {
       name: "Username",
       selector: (row) => row.username,
       sortable: true,
-       width: '150px'
+      //  width: '150px'
     },
     {
       name: "Phone Number",
       selector: (row) => row.phone_number,
       sortable: true,
-       width: '150px'
+      //  width: '150px'
     },
     {
-      name: "Pincode",
-      selector: (row) => row.pincode,
+      name: "Email",
+      selector: (row) => row.email,
       sortable: true,
+      //  width: '150px'
     },
+    // {
+    //   name: "Pincode",
+    //   selector: (row) => row.pincode,
+    //   sortable: true,
+    // },
+    // {
+    //   name: "State",
+    //   selector: (row) => row.state,
+    //   sortable: true,
+    // },
+    // {
+    //   name: "Formatted Address",
+    //   selector: (row) => row.formatted_address,
+    //   sortable: true,
+    // },
+    // {
+    //   name: "City",
+    //   selector: (row) => row.city,
+    //   sortable: true,
+    // },
+    // {
+    //   name: "Country",
+    //   selector: (row) => row.country,
+    //   sortable: true,
+    // },
     {
-      name: "State",
-      selector: (row) => row.state,
-      sortable: true,
-    },
-    {
-      name: "Formatted Address",
-      selector: (row) => row.formatted_address,
-      sortable: true,
-    },
-    {
-      name: "City",
-      selector: (row) => row.city,
-      sortable: true,
-    },
-    {
-      name: "Country",
-      selector: (row) => row.country,
+      name: "created_at",
+      selector: row => row.created_at.slice(0, 10),
       sortable: true,
     },
     {
