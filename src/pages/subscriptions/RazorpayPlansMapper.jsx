@@ -87,9 +87,9 @@ const RazorpayPlansMapper = () => {
 
   // Columns for the DataTable
   const columns = [
-    { name: "ID", selector: row => row.id, sortable: true },
+    // { name: "ID", selector: row => row.id, sortable: true },
     { name: "Plan Id", selector: row => row.plan_id, sortable: true },
-    { name: "Subscription Type Id", selector: row => row.subscription_type_id, sortable: true },
+    // { name: "Subscription Type Id", selector: row => row.subscription_type_id, sortable: true },
     { name: "Duration", selector: row => row.duration, sortable: true },
     { name: "Subscription Type Name", selector: row => row.subscription_type_name, sortable: true },
     { name: "Vendor Type", selector: row => row.vendor_type, sortable: true },
