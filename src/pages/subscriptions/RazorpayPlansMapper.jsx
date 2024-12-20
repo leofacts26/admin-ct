@@ -103,7 +103,8 @@ const RazorpayPlansMapper = () => {
       vendor_type: type,
       subscription_type_id,
       plan_id,
-      duration
+      duration,
+      mode: mode
     }
 
     if (editId === null) {
