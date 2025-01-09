@@ -9,6 +9,7 @@ const initialState = {
   razorpayPlansMapperList: [],
   vendorSubscriptionEvents: [],
   vendorSubscriptionList: [],
+  vendorTiffinSubscriptionList: [],
   vendorSubscriptionTypesList: [],
   razorpayPlansList: [],
 }
@@ -69,10 +70,27 @@ export const fetchVendorSubscriptionEvents = createAsyncThunk(
 
 export const fetchVendorSubscriptionList = createAsyncThunk(
   'user/fetchSubscriptionList',
-  async (user, thunkAPI) => {
+  async (category, thunkAPI) => {
     try {
       const token = thunkAPI.getState().authSlice.token || localStorage.getItem('token');
-      const response = await api.get(`${BASE_URL}/rz-list-subscription-types-by-vendor-type?vendor_type=Caterer&limit=10000&page=1`, {
+      const response = await api.get(`${BASE_URL}/rz-list-subscription-types-by-vendor-type?vendor_type=${category}&limit=10000&page=1`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response?.data?.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+  }
+)
+
+export const fetchTiffinVendorSubscriptionList = createAsyncThunk(
+  'user/fetchTiffinVendorSubscriptionList',
+  async (category, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().authSlice.token || localStorage.getItem('token');
+      const response = await api.get(`${BASE_URL}/rz-list-subscription-types-by-vendor-type?vendor_type=${category}&limit=10000&page=1`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -326,6 +344,18 @@ export const subscriptionSlice = createSlice({
         state.vendorSubscriptionList = payload;
       })
       .addCase(fetchVendorSubscriptionList.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(datavalidationerror(payload));
+      })
+      // fetchTiffinVendorSubscriptionList 
+      .addCase(fetchTiffinVendorSubscriptionList.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchTiffinVendorSubscriptionList.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.vendorTiffinSubscriptionList = payload;
+      })
+      .addCase(fetchTiffinVendorSubscriptionList.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(datavalidationerror(payload));
       })
