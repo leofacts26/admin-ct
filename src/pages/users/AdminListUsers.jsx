@@ -147,14 +147,14 @@ const AdminListUsers = () => {
       // width: '150px'
     },
     {
-      name: "Password",
-      selector: (row) => row.password,
+      name: "Username",
+      selector: (row) => row.username,
       sortable: true,
       // width: '150px'
     },
     {
-      name: "Username",
-      selector: (row) => row.username,
+      name: "Password",
+      selector: (row) => row.password,
       sortable: true,
       // width: '150px'
     },
