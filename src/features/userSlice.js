@@ -59,8 +59,10 @@ export const createAdminUser = createAsyncThunk(
                     Authorization: `Bearer ${token}`,
                 },
             });
+            toast.success(response.data.message)
             return response?.data?.data;
         } catch (error) {
+            toast.error(error.response.data.meaasge)
             return thunkAPI.rejectWithValue(error.response.data.msg);
         }
     }
@@ -142,6 +144,8 @@ export const usersSlice = createSlice({
                 state.isLoading = false;
                 toast.error(datavalidationerror(payload));
             })
+
+
     }
 })
 

@@ -18,6 +18,7 @@ import Loader from '../../components/Loader';
 
 const initialState = {
   username: '',
+  password: '',
   phone_number: '',
   email: '',
   role_id: '',
@@ -45,6 +46,7 @@ const AdminListUsers = () => {
   const handleClose = () => {
     setShow(false)
     setEditId(null)
+    setValues(initialState)
   };
   const handleShow = () => setShow(true);
 
@@ -67,6 +69,7 @@ const AdminListUsers = () => {
     if (adminUserList) {
       const formattedData = adminUserList.map((user, index) => ({
         id: user.id,
+        password: user.password,
         name: user.name,
         email: user.email,
         username: user.username,
@@ -95,6 +98,7 @@ const AdminListUsers = () => {
       return (
         row?.id?.toString().toLowerCase().includes(searchValue) ||
         row?.name?.toLowerCase().includes(searchValue) ||
+        row?.password?.toLowerCase().includes(searchValue) ||
         row?.email?.toLowerCase().includes(searchValue) ||
         row?.username?.toLowerCase().includes(searchValue) ||
         row?.phone_number?.toLowerCase().includes(searchValue) ||
@@ -134,7 +138,7 @@ const AdminListUsers = () => {
       name: "ID",
       selector: (row) => row.id,
       sortable: true,
-       width: '100px'
+      // width: '100px'
     },
     {
       name: "Role",
@@ -143,22 +147,28 @@ const AdminListUsers = () => {
       // width: '150px'
     },
     {
+      name: "Password",
+      selector: (row) => row.password,
+      sortable: true,
+      // width: '150px'
+    },
+    {
       name: "Username",
       selector: (row) => row.username,
       sortable: true,
-      //  width: '150px'
+      // width: '150px'
     },
     {
       name: "Phone Number",
       selector: (row) => row.phone_number,
       sortable: true,
-      //  width: '150px'
+      // width: '150px'
     },
     {
       name: "Email",
       selector: (row) => row.email,
       sortable: true,
-      //  width: '150px'
+      // width: '150px'
     },
     // {
     //   name: "Pincode",
@@ -189,11 +199,13 @@ const AdminListUsers = () => {
       name: "created_at",
       selector: row => row.created_at.slice(0, 10),
       sortable: true,
+      // width: '150px'
     },
     {
       name: "Status",
+      // width: '150px',
       cell: row => (
-        <div className="form-check form-switch">
+        <div className="form-check form-switch" >
           <input
             className="form-check-input"
             type="checkbox"
@@ -231,6 +243,7 @@ const AdminListUsers = () => {
     setValues((prevValues) => ({
       ...prevValues,
       username: data?.username,
+      password: data?.password,
       phone_number: data?.phone_number,
       email: data?.email,
       role_id: data?.role_id,
@@ -248,6 +261,7 @@ const AdminListUsers = () => {
     e.preventDefault();
     const {
       username,
+      password,
       phone_number,
       email,
       role_id,
@@ -261,6 +275,7 @@ const AdminListUsers = () => {
 
     const data = {
       username,
+      password,
       phone_number,
       email,
       role_id,
@@ -297,7 +312,7 @@ const AdminListUsers = () => {
         <div className="row mb-4 me-2">
           <div className="d-flex justify-content-between">
             <h1 className="header-title">
-            Total Employee’s - {adminUserList?.length}
+              Total Employee’s - {adminUserList?.length}
             </h1>
             <button className='btn btn-primary fit-content' variant="primary" onClick={handleShow}>
               Add Employee
@@ -345,6 +360,20 @@ const AdminListUsers = () => {
               <div className='col-12'>
                 <label for="name" className="form-label"> <b>Username</b> </label>
                 <input type="text" className="form-control" placeholder="username" name="username" required onChange={handleChange} value={values.username} />
+              </div>
+              <div className='col-12 mt-3'>
+                <label htmlFor="password" className="form-label">
+                  <b>Password</b>
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Password"
+                  name="password"
+                  required
+                  onChange={handleChange}
+                  value={values.password}
+                />
               </div>
               <div className='col-12 mt-4'>
                 <label for="name" className="form-label"> <b>Phone Number</b> </label>

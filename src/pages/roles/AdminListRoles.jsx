@@ -98,10 +98,26 @@ const AdminListRoles = () => {
     //   selector: row => row.role_id,
     //   sortable: true,
     // },
+    // {
+    //   name: "role name",
+    //   selector: row => row.role_name,
+    //   sortable: true,
+    // },
     {
-      name: "role name",
+      name: "role Name",
       selector: row => row.role_name,
       sortable: true,
+      cell: row => (
+        <Link
+          to={`/admin-list-roles-details/${row?.role_id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-dark text-truncate d-inline-block"
+          style={{ maxWidth: "200px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+        >
+          {row.role_name}
+        </Link>
+      ),
     },
     // {
     //   name: "is active",
@@ -135,7 +151,7 @@ const AdminListRoles = () => {
       name: "Details",
       cell: (row) => (
         <>
-          <Link className="btn btn-success me-1" to={`/admin-list-roles-details/${row?.role_id}`}
+          <Link target='_blank' className="btn btn-success me-1" to={`/admin-list-roles-details/${row?.role_id}`}
             onClick={() => dispatch(setListRoleName(row?.role_name))}>
             View
           </Link>

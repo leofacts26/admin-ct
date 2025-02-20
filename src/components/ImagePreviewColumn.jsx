@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Stack } from "react-bootstrap";
 import { FaCloudUploadAlt, FaDownload } from "react-icons/fa";
 
 const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, handleImageError }) => {
@@ -15,6 +15,8 @@ const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, ha
     setShowImagePreview(false);
     setSelectedImage(null);
   };
+
+  console.log(row, "row")
 
   return (
     <>
@@ -90,21 +92,53 @@ const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, ha
         <Modal.Footer>
           {selectedImage && (
             <>
-              {/* Download Button */}
-              <Button
-                variant="primary"
-                href={selectedImage}
-                target="_blank" // Open in a new tab
-                rel="noopener noreferrer" // Ensure safe linking
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <FaDownload style={{ marginRight: "8px" }} />
-                Download 
-              </Button>
+
+              <div style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}>
+                <div>
+                  <input
+                    accept="image/*"
+                    id={`onUploadCityImage-${row.id}`}
+                    multiple
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={(e) => onUploadCityImage(e)}
+                  />
+                  <label htmlFor={`onUploadCityImage-${row.id}`}>
+                    <h4
+                      style={{ cursor: "pointer" }}
+                      onClick={() => dispatch(setCuisineId(row?.id))}
+                    >
+                      ReUpload   <FaCloudUploadAlt size={30} style={{ marginLeft: '10px' }} />
+                    </h4>
+                  </label>
+                </div>
+
+                <div>
+                  <Button
+                    variant="primary"
+                    href={selectedImage}
+                    target="_blank" // Open in a new tab
+                    rel="noopener noreferrer" // Ensure safe linking
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <FaDownload style={{ marginRight: "8px" }} />
+                    Download
+                  </Button>
+                </div>
+              </div>
+
+
+
+
             </>
           )}
         </Modal.Footer>

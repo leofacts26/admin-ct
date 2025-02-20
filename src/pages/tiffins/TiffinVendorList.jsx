@@ -171,6 +171,17 @@ const TiffinVendorList = () => {
       name: "Business Name",
       selector: row => row.vendor_service_name,
       sortable: true,
+      cell: row => (
+        <Link
+          to={`/tiffin-list/${row.id}?company_id=${row.company_id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-dark text-truncate d-inline-block"
+          style={{ maxWidth: "200px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+        >
+          {row.vendor_service_name}
+        </Link>
+      ),
     },
     {
       name: "Phone No",
@@ -335,6 +346,7 @@ const TiffinVendorList = () => {
         <>
           {row?.company_id ? (
             <Link
+              target='_blank'
               onClick={() => onHandleCateringDetails(row)}
               to={`/tiffin-list/${row.id}?company_id=${row.company_id}`}
               className='text-primary cursor-pointer'
@@ -592,13 +604,13 @@ const TiffinVendorList = () => {
 
       <TiffinDeletedVendor />
 
-      <Modal centered show={show} onHide={handleClose}>
+      {/* <Modal centered show={show} onHide={handleClose}>
         <form onSubmit={onHandleSubmit}>
           <Modal.Header closeButton>
             <Modal.Title>{editId ? 'Edit Kitchen Type' : 'Create Kitchen Type'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row">
+            <div className="row"> */}
               {/* Input field for Edit ID */}
               {/* <div className="col-12 mb-3">
                 <label htmlFor="editId" className="form-label"><b>ID</b></label>
@@ -629,7 +641,7 @@ const TiffinVendorList = () => {
               </div> */}
 
               {/* Select box for listing_status */}
-              <div className="col-12 mb-3">
+              {/* <div className="col-12 mb-3">
                 <label htmlFor="listing_status" className="form-label"><b>Listing Status</b></label>
                 <select
                   className="form-select"
@@ -652,7 +664,7 @@ const TiffinVendorList = () => {
             </Button>
           </Modal.Footer>
         </form>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

@@ -536,6 +536,9 @@ const Cuisines = () => {
               value={mainCategoryChild}
               onChange={(e) => setMainCategoryChild(e.target.value)}
             >
+              <option value="" disabled>
+                Select Category
+              </option>
               {parentList?.map((item) => {
                 return (
                   <>

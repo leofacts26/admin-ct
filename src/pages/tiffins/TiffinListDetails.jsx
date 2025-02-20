@@ -59,7 +59,10 @@ const TiffinListDetails = () => {
     <div className="container-fluid my-5">
 
       <div className="mb-4 cursor-pointer">
-        <button className="btn btn-success me-1" onClick={() => navigate(-1)}>
+        <button className="btn btn-success me-1"
+          // onClick={() => navigate(-1)}
+          onClick={() => window.close()}
+        >
           <IoMdArrowRoundBack /> Back
         </button>
       </div>

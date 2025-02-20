@@ -168,6 +168,17 @@ const TiffinDeletedVendor = () => {
       name: "Business Name",
       selector: row => row.vendor_service_name,
       sortable: true,
+      cell: row => (
+        <Link
+          to={`/tiffin-list/${row.id}?company_id=${row.company_id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-dark text-truncate d-inline-block"
+          style={{ maxWidth: "200px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+        >
+          {row.vendor_service_name}
+        </Link>
+      ),
     },
     {
       name: "Phone No",
@@ -332,6 +343,7 @@ const TiffinDeletedVendor = () => {
         <>
           {row?.company_id ? (
             <Link
+              target='_blank'
               onClick={() => onHandleCateringDetails(row)}
               to={`/vendor-list/${row.id}?company_id=${row.company_id}`}
               className='text-primary cursor-pointer'
@@ -590,15 +602,15 @@ const TiffinDeletedVendor = () => {
 
       <br />
 
-      <Modal centered show={show} onHide={handleClose}>
+      {/* <Modal centered show={show} onHide={handleClose}>
         <form onSubmit={onHandleSubmit}>
           <Modal.Header closeButton>
             <Modal.Title>{editId ? 'Edit Kitchen Type' : 'Create Kitchen Type'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row">
-              {/* Input field for Edit ID */}
-              {/* <div className="col-12 mb-3">
+            <div className="row"> */}
+      {/* Input field for Edit ID */}
+      {/* <div className="col-12 mb-3">
                 <label htmlFor="editId" className="form-label"><b>ID</b></label>
                 <input
                   disabled
@@ -612,8 +624,8 @@ const TiffinDeletedVendor = () => {
               </div> */}
 
 
-              {/* Select box for is_deleted_by_admin */}
-              {/* <div className="col-12 mb-3">
+      {/* Select box for is_deleted_by_admin */}
+      {/* <div className="col-12 mb-3">
                 <label htmlFor="is_deleted_by_admin" className="form-label"><b>Deleted by Admin</b></label>
                 <select
                   className="form-select"
@@ -626,8 +638,8 @@ const TiffinDeletedVendor = () => {
                 </select>
               </div> */}
 
-              {/* Select box for listing_status */}
-              <div className="col-12 mb-3">
+      {/* Select box for listing_status */}
+      {/* <div className="col-12 mb-3">
                 <label htmlFor="listing_status" className="form-label"><b>Listing Status</b></label>
                 <select
                   className="form-select"
@@ -650,7 +662,7 @@ const TiffinDeletedVendor = () => {
             </Button>
           </Modal.Footer>
         </form>
-      </Modal>
+      </Modal> */}
 
     </>
   );
