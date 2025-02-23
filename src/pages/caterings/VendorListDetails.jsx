@@ -1038,7 +1038,7 @@ const VendorListDetails = () => {
                 />
               </div>
               <div className='col-3 mt-4'>
-                <label for="name" className="form-label"> <b>formatted address</b> </label>
+                <label for="name" className="form-label"> <b>FULL ADDRESS</b> </label>
                 <input type="text" className="form-control" placeholder="formatted address" name="formatted_address"
                   value={businessProfileValues?.formatted_address}
                   onChange={handleChange}

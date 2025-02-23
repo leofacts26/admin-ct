@@ -265,7 +265,7 @@ const TiffinListDetails = () => {
               <tr>
                 <th style={{ fontSize: '10px' }}>latitude</th>
                 <th style={{ fontSize: '10px' }}>longitude</th>
-                <th style={{ fontSize: '10px' }}>formatted_address</th>
+                <th style={{ fontSize: '10px' }}>FULL ADDRESS</th>
               </tr>
             </thead>
             <tbody>
