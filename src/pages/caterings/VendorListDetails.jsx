@@ -596,7 +596,7 @@ const VendorListDetails = () => {
 
           <div className="row mt-4">
             <div className="bg-secondary text-white py-3 d-flex justify-content-between">
-              <h3 className='mb-0'>Occastions You Cater</h3>
+              <h3 className='mb-0'>Occations You Cater</h3>
             </div>
             <div className='mt-3'>
               {occasions && occasions.length > 0
