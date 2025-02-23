@@ -17,6 +17,7 @@ const initialState = {
 }
 
 
+
 const AdminListRoles = () => {
 
   const dispatch = useDispatch()
@@ -152,7 +153,10 @@ const AdminListRoles = () => {
       cell: (row) => (
         <>
           <Link target='_blank' className="btn btn-success me-1" to={`/admin-list-roles-details/${row?.role_id}`}
-            onClick={() => dispatch(setListRoleName(row?.role_name))}>
+            onClick={() => {
+              dispatch(setListRoleName(row?.role_name));
+              localStorage.setItem("roleName", row?.role_name); // Store in localStorage
+            }}>
             View
           </Link>
         </>

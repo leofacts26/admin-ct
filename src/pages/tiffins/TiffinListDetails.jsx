@@ -239,20 +239,20 @@ const TiffinListDetails = () => {
             <thead>
               <tr>
                 <th style={{ fontSize: '10px' }}>street_name</th>
-                <th style={{ fontSize: '10px' }}>state</th>
                 <th style={{ fontSize: '10px' }}>area</th>
-                <th style={{ fontSize: '10px' }}>latitude</th>
-                <th style={{ fontSize: '10px' }}>longitude</th>
+                <th style={{ fontSize: '10px' }}>city</th>
+                <th style={{ fontSize: '10px' }}>state</th>
+                <th style={{ fontSize: '10px' }}>country</th>
                 <th style={{ fontSize: '10px' }}>pincode</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>{cateringVendorsDetail?.street_name ? cateringVendorsDetail?.street_name : 'N/A'}</td>
-                <td>{cateringVendorsDetail?.state ? cateringVendorsDetail?.state : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.area ? cateringVendorsDetail?.area : 'N/A'}</td>
-                <td>{cateringVendorsDetail?.latitude ? cateringVendorsDetail?.latitude : 'N/A'}</td>
-                <td>{cateringVendorsDetail?.longitude ? cateringVendorsDetail?.longitude : 'N/A'}</td>
+                <td>{cateringVendorsDetail?.city ? cateringVendorsDetail?.city : 'N/A'}</td>
+                <td>{cateringVendorsDetail?.state ? cateringVendorsDetail?.state : 'N/A'}</td>
+                <td>{cateringVendorsDetail?.country ? cateringVendorsDetail?.country : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.pincode ? cateringVendorsDetail?.pincode : 'N/A'}</td>
               </tr>
             </tbody>
@@ -263,15 +263,15 @@ const TiffinListDetails = () => {
 
             <thead>
               <tr>
-                <th style={{ fontSize: '10px' }}>city</th>
-                <th style={{ fontSize: '10px' }}>country</th>
+                <th style={{ fontSize: '10px' }}>latitude</th>
+                <th style={{ fontSize: '10px' }}>longitude</th>
                 <th style={{ fontSize: '10px' }}>formatted_address</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{cateringVendorsDetail?.city ? cateringVendorsDetail?.city : 'N/A'}</td>
-                <td>{cateringVendorsDetail?.country ? cateringVendorsDetail?.country : 'N/A'}</td>
+                <td>{cateringVendorsDetail?.latitude ? cateringVendorsDetail?.latitude : 'N/A'}</td>
+                <td>{cateringVendorsDetail?.longitude ? cateringVendorsDetail?.longitude : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.formatted_address ? cateringVendorsDetail?.formatted_address : 'N/A'}</td>
               </tr>
             </tbody>
@@ -330,7 +330,7 @@ const TiffinListDetails = () => {
               <th style={{ fontSize: '10px' }}>Work Hours (Start)</th>
               <th style={{ fontSize: '10px' }}>Work Hours (End)</th>
               <th style={{ fontSize: '10px' }}>Location Link</th>
-              <th style={{ fontSize: '10px' }}>Other Branches</th>
+              {/* <th style={{ fontSize: '10px' }}>Other Branches</th> */}
             </tr>
           </thead>
           <tbody>
@@ -350,7 +350,7 @@ const TiffinListDetails = () => {
                   </a>
                 ) : 'N/A'}
               </td>
-              <td> {branches?.length > 0 ? branches?.map(item => item.catering_service_name)?.join(', ') : 'N/A'}</td>
+              {/* <td> {branches?.length > 0 ? branches?.map(item => item.catering_service_name)?.join(', ') : 'N/A'}</td> */}
             </tr>
           </tbody>
         </Table>

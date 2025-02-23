@@ -333,9 +333,9 @@ const VendorListDetails = () => {
 
 
         <div className="mb-4 cursor-pointer">
-          <button className="btn btn-success me-1" 
-          // onClick={() => navigate(-1)}
-          onClick={() => window.close()}
+          <button className="btn btn-success me-1"
+            // onClick={() => navigate(-1)}
+            onClick={() => window.close()}
           >
             <IoMdArrowRoundBack /> Back
           </button>
@@ -517,20 +517,20 @@ const VendorListDetails = () => {
               <thead>
                 <tr>
                   <th style={{ fontSize: '10px' }}>street_name</th>
-                  <th style={{ fontSize: '10px' }}>state</th>
                   <th style={{ fontSize: '10px' }}>area</th>
-                  <th style={{ fontSize: '10px' }}>latitude</th>
-                  <th style={{ fontSize: '10px' }}>longitude</th>
+                  <th style={{ fontSize: '10px' }}>city</th>
+                  <th style={{ fontSize: '10px' }}>state</th>
+                  <th style={{ fontSize: '10px' }}>country</th>
                   <th style={{ fontSize: '10px' }}>pincode</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{cateringVendorsDetail?.street_name ? cateringVendorsDetail?.street_name : 'N/A'}</td>
-                  <td>{cateringVendorsDetail?.state ? cateringVendorsDetail?.state : 'N/A'}</td>
                   <td>{cateringVendorsDetail?.area ? cateringVendorsDetail?.area : 'N/A'}</td>
-                  <td>{cateringVendorsDetail?.latitude ? cateringVendorsDetail?.latitude : 'N/A'}</td>
-                  <td>{cateringVendorsDetail?.longitude ? cateringVendorsDetail?.longitude : 'N/A'}</td>
+                  <td>{cateringVendorsDetail?.city ? cateringVendorsDetail?.city : 'N/A'}</td>
+                  <td>{cateringVendorsDetail?.state ? cateringVendorsDetail?.state : 'N/A'}</td>
+                  <td>{cateringVendorsDetail?.country ? cateringVendorsDetail?.country : 'N/A'}</td>
                   <td>{cateringVendorsDetail?.pincode ? cateringVendorsDetail?.pincode : 'N/A'}</td>
                 </tr>
               </tbody>
@@ -541,15 +541,15 @@ const VendorListDetails = () => {
 
               <thead>
                 <tr>
-                  <th style={{ fontSize: '10px' }}>city</th>
-                  <th style={{ fontSize: '10px' }}>country</th>
+                  <th style={{ fontSize: '10px' }}>latitude</th>
+                  <th style={{ fontSize: '10px' }}>longitude</th>
                   <th style={{ fontSize: '10px' }}>formatted_address</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>{cateringVendorsDetail?.city ? cateringVendorsDetail?.city : 'N/A'}</td>
-                  <td>{cateringVendorsDetail?.country ? cateringVendorsDetail?.country : 'N/A'}</td>
+                  <td>{cateringVendorsDetail?.latitude ? cateringVendorsDetail?.latitude : 'N/A'}</td>
+                  <td>{cateringVendorsDetail?.longitude ? cateringVendorsDetail?.longitude : 'N/A'}</td>
                   <td>{cateringVendorsDetail?.formatted_address ? cateringVendorsDetail?.formatted_address : 'N/A'}</td>
                 </tr>
               </tbody>
@@ -593,9 +593,10 @@ const VendorListDetails = () => {
             </tbody>
           </Table>
 
+
           <div className="row mt-4">
-            <div className="text-secondary d-flex justify-content-between">
-              <h4 className='mb-0'> Occastions You Cater</h4>
+            <div className="bg-secondary text-white py-3 d-flex justify-content-between">
+              <h3 className='mb-0'>Occastions You Cater</h3>
             </div>
             <div className='mt-3'>
               {occasions && occasions.length > 0
@@ -607,15 +608,15 @@ const VendorListDetails = () => {
                       {index < filteredOccasions.length - 1 && ', '}
                     </span>
                   ))
-                : 'N/A'}
+                : <h3 className='mb-0'>No Occations Found</h3>}
             </div>
 
           </div>
 
 
           <div className="row mt-4">
-            <div className="text-secondary d-flex justify-content-between">
-              <h4 className='mb-0'>Cuisines You Cater</h4>
+            <div className="bg-secondary text-white py-3 d-flex justify-content-between">
+              <h3 className='mb-0'>Cuisines You Cater</h3>
             </div>
             <div className='mt-3'>
               {cuisines && cuisines.length > 0
@@ -627,7 +628,7 @@ const VendorListDetails = () => {
                       {index < filteredCuisines.length - 1 && ', '}
                     </span>
                   ))
-                : 'N/A'}
+                : <h3 className='mb-0'>No Cuisines Found</h3>}
             </div>
 
 

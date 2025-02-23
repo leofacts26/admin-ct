@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
-import { adminAssociateFeature, adminDeleteFeatureRole, adminListFeaturesForRoles, fetchFeaturesDisassociated } from '../../features/adminRoleSlice';
+import { adminAssociateFeature, adminDeleteFeatureRole, adminListFeaturesForRoles, fetchFeaturesDisassociated, setListRoleName } from '../../features/adminRoleSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Loader from '../../components/Loader';
@@ -250,6 +250,14 @@ const AdminListFeaturesDetails = () => {
       button: true,
     }
   ];
+
+
+  useEffect(() => {
+    const storedRoleName = localStorage.getItem("roleName");
+    if (storedRoleName) {
+      dispatch(setListRoleName(storedRoleName)); // Restore Redux state
+    }
+  }, [dispatch]);
 
 
   return (
