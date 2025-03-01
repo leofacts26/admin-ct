@@ -249,7 +249,7 @@ const TiffinListDetails = () => {
             <tbody>
               <tr>
                 <td>{cateringVendorsDetail?.street_name ? cateringVendorsDetail?.street_name : 'N/A'}</td>
-                <td>{cateringVendorsDetail?.area ? cateringVendorsDetail?.area : 'N/A'}</td>
+                <td>{cateringVendorsDetail?.street_address ? cateringVendorsDetail?.street_address : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.city ? cateringVendorsDetail?.city : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.state ? cateringVendorsDetail?.state : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.country ? cateringVendorsDetail?.country : 'N/A'}</td>
