@@ -238,7 +238,7 @@ const TiffinListDetails = () => {
 
             <thead>
               <tr>
-                <th style={{ fontSize: '10px' }}>street_name</th>
+                <th style={{ fontSize: '10px' }}>Street Address</th>
                 <th style={{ fontSize: '10px' }}>area</th>
                 <th style={{ fontSize: '10px' }}>city</th>
                 <th style={{ fontSize: '10px' }}>state</th>
@@ -248,8 +248,8 @@ const TiffinListDetails = () => {
             </thead>
             <tbody>
               <tr>
-                <td>{cateringVendorsDetail?.street_name ? cateringVendorsDetail?.street_name : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.street_address ? cateringVendorsDetail?.street_address : 'N/A'}</td>
+                <td>{cateringVendorsDetail?.area ? cateringVendorsDetail?.area : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.city ? cateringVendorsDetail?.city : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.state ? cateringVendorsDetail?.state : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.country ? cateringVendorsDetail?.country : 'N/A'}</td>
@@ -265,14 +265,14 @@ const TiffinListDetails = () => {
               <tr>
                 <th style={{ fontSize: '10px' }}>latitude</th>
                 <th style={{ fontSize: '10px' }}>longitude</th>
-                <th style={{ fontSize: '10px' }}>FULL ADDRESS</th>
+                <th style={{ fontSize: '10px' }}>FUull Address</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>{cateringVendorsDetail?.latitude ? cateringVendorsDetail?.latitude : 'N/A'}</td>
                 <td>{cateringVendorsDetail?.longitude ? cateringVendorsDetail?.longitude : 'N/A'}</td>
-                <td>{cateringVendorsDetail?.formatted_address ? cateringVendorsDetail?.formatted_address : 'N/A'}</td>
+                <td style={{ width: '300px' }}>{`${`${cateringVendorsDetail?.street_address}, ` + `${cateringVendorsDetail?.formatted_address} - ` + cateringVendorsDetail?.pincode}`}</td>
               </tr>
             </tbody>
           </>
@@ -314,6 +314,34 @@ const TiffinListDetails = () => {
         </Table>
       </div>
       <hr />
+
+
+      <div className="row mx-2">
+        <div className="bg-secondary text-white py-3 d-flex justify-content-between">
+          <h3 className='mb-0'>Cuisines</h3>
+          {/* <h3 className='mb-0 text-warning' style={{ cursor: 'pointer' }}>Edit</h3> */}
+        </div>
+        <Table responsive="xl" className='m-0'>
+          <div className="row mt-4">
+            <div className='mt-3'>
+              {cuisines && cuisines.length > 0
+                ? cuisines
+                  .filter((item) => item.selected === '1')
+                  .map((item, index, filteredCuisines) => (
+                    <span key={item.cuisine_name} className='cuisine-item'>
+                      {item.cuisine_name}
+                      {index < filteredCuisines.length - 1 && ', '}
+                    </span>
+                  ))
+                : <h3 className='mb-0'>No Cuisines Found</h3>}
+            </div>
+          </div>
+        </Table>
+      </div>
+      <hr />
+
+
+
 
 
 

@@ -35,12 +35,17 @@ const initialState = {
 const AdminListUsers = () => {
   const { adminRoleList } = useSelector((state) => state.roleSlice)
   const dispatch = useDispatch()
-  const { adminUserList, isLoading } = useSelector((state) => state.users)
+  const { adminUserList, userList, isLoading } = useSelector((state) => state.users)
   const [values, setValues] = useState(initialState)
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const { exportToExcel } = useExportData()
   const [editId, setEditId] = useState(null)
+
+  useEffect(() => {
+    dispatch(fetchUserData());
+  }, [dispatch]);
+
 
   const [show, setShow] = useState(false);
   const handleClose = () => {
@@ -66,11 +71,11 @@ const AdminListUsers = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (adminUserList) {
-      const formattedData = adminUserList.map((user, index) => ({
+    if (userList) {
+      const formattedData = userList.map((user, index) => ({
         id: user.id,
         password: user.password,
-        name: user.name,
+        role_name: user.role_name,
         email: user.email,
         username: user.username,
         phone_number: user.phone_number,
@@ -86,7 +91,7 @@ const AdminListUsers = () => {
       setData(formattedData);
       setFilteredData(formattedData);
     }
-  }, [adminUserList]);
+  }, [userList]);
 
   const handleSearch = (e) => {
     const searchValue = e.target.value.toLowerCase();
@@ -97,8 +102,8 @@ const AdminListUsers = () => {
     const newFilteredData = data.filter((row) => {
       return (
         row?.id?.toString().toLowerCase().includes(searchValue) ||
-        row?.name?.toLowerCase().includes(searchValue) ||
         row?.password?.toLowerCase().includes(searchValue) ||
+        row?.role_name?.toLowerCase().includes(searchValue) ||
         row?.email?.toLowerCase().includes(searchValue) ||
         row?.username?.toLowerCase().includes(searchValue) ||
         row?.phone_number?.toLowerCase().includes(searchValue) ||
@@ -129,7 +134,8 @@ const AdminListUsers = () => {
       is_active: item.is_active === '1' ? 0 : '1'
     }
     await dispatch(toggleAdminUser(data))
-    await dispatch(fetchAdminUsers());
+    // await dispatch(fetchAdminUsers());
+    dispatch(fetchUserData());
   }
 
 
@@ -142,7 +148,7 @@ const AdminListUsers = () => {
     },
     {
       name: "Role",
-      selector: (row) => row.name,
+      selector: (row) => row.role_name,
       sortable: true,
       // width: '150px'
     },
@@ -296,7 +302,8 @@ const AdminListUsers = () => {
     } else {
       await dispatch(updateAdminUser(data))
     }
-    await dispatch(fetchAdminUsers());
+    // await dispatch(fetchAdminUsers());
+    dispatch(fetchUserData());
     setValues(initialState)
     handleClose()
   }
@@ -312,7 +319,7 @@ const AdminListUsers = () => {
         <div className="row mb-4 me-2">
           <div className="d-flex justify-content-between">
             <h1 className="header-title">
-              Total Employee’s - {adminUserList?.length}
+              Total Employee’s - {userList?.length}
             </h1>
             <button className='btn btn-primary fit-content' variant="primary" onClick={handleShow}>
               Add Employee

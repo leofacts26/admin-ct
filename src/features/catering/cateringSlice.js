@@ -55,7 +55,7 @@ export const fetchCateringDeletedVendors = createAsyncThunk(
     async (type, thunkAPI) => {
         const token = thunkAPI.getState().authSlice.token || localStorage.getItem('token');
         try {
-            const response = await api.get(`${BASE_URL}/admin-list-vendors-del?vendor_type=${type}&current_page=1&limit=100`, {
+            const response = await api.get(`${BASE_URL}/admin-list-vendors-del?vendor_type=${type}&current_page=1&limit=1000000`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

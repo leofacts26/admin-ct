@@ -2,30 +2,34 @@ import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import GlobalSearch from '../../components/common/GlobalSearch';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserData } from '../../features/userSlice';
+import { fetchAdminUsers, fetchUserData } from '../../features/userSlice';
 import Heading from '../../components/common/Heading';
 import useExportData from '../../hooks/useExportData';
 import { tableCustomStyles } from '../../components/tableCustomStyles';
 import Loader from '../../components/Loader';
 
 
+
 const Users = () => {
   const dispatch = useDispatch()
-  const { userList, isLoading } = useSelector((state) => state.users)
+  const { userList, adminUserList, isLoading } = useSelector((state) => state.users)
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const { exportToExcel } = useExportData()
 
   useEffect(() => {
-    dispatch(fetchUserData());
+    // dispatch(fetchUserData());
+    dispatch(fetchAdminUsers());
   }, [dispatch]);
+
+
 
   useEffect(() => {
     if (userList) {
       const formattedData = userList.map((user, index) => ({
         sNO: index + 1,
         name: user.username,
-        role: user.role,
+        role: user.role_name,
         phoneNo: user.phone_extension + user.phone_number,
         DateTime: new Date(user.created_at).toLocaleDateString(),
         EmailID: user.email,
@@ -47,7 +51,7 @@ const Users = () => {
         row?.name?.toLowerCase().includes(searchValue) ||
         // row?.role?.toLowerCase().includes(searchValue) ||
         row?.phoneNo?.toLowerCase().includes(searchValue) ||
-        row?.DateTime?.toLowerCase().includes(searchValue) 
+        row?.DateTime?.toLowerCase().includes(searchValue)
         // row?.EmailID?.toLowerCase().includes(searchValue)
       );
     });
