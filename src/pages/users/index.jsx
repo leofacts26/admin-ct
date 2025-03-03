@@ -25,19 +25,19 @@ const Users = () => {
 
 
   useEffect(() => {
-    if (userList) {
-      const formattedData = userList.map((user, index) => ({
+    if (adminUserList) {
+      const formattedData = adminUserList.map((user, index) => ({
         sNO: index + 1,
         name: user.username,
         role: user.role_name,
-        phoneNo: user.phone_extension + user.phone_number,
+        phoneNo: user.phone_number,
         DateTime: new Date(user.created_at).toLocaleDateString(),
         EmailID: user.email,
       }));
       setData(formattedData);
       setFilteredData(formattedData);
     }
-  }, [userList]);
+  }, [adminUserList]);
 
   const handleSearch = (e) => {
     const searchValue = e.target.value.toLowerCase();
@@ -100,7 +100,7 @@ const Users = () => {
         <div className="row mb-4  me-2">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="header-title">
-              Total Registered Users  - {userList?.length}
+              Total Registered Users  - {adminUserList?.length}
             </h1>
             <button className='btn btn-secondary fit-content ms-2' variant="primary" onClick={() => exportToExcel(filteredData, 'users')}>
               Export
