@@ -11,6 +11,7 @@ const initialState = {
 }
 
 
+
 export const fetchUserData = createAsyncThunk(
     'user/fetchUserData',
     async (user, thunkAPI) => {

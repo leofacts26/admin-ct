@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Modal, Button, Stack } from "react-bootstrap";
 import { FaCloudUploadAlt, FaDownload } from "react-icons/fa";
 
-const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, handleImageError }) => {
+const ImagePreviewColumnKitchen = ({ row, dispatch, setKitchenId, onUploadKitchenImage, handleImageError }) => {
   const [showImagePreview, setShowImagePreview] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  // console.log(row, "rowrowrowrowrowrow");
+  // console.log(setKitchenId, "setKitchenIdsetKitchenIdsetKitchenId");
+  
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -16,7 +19,7 @@ const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, ha
     setSelectedImage(null);
   };
 
-  // console.log(row, "row")
+  console.log(row, "row")
 
   return (
     <>
@@ -25,16 +28,16 @@ const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, ha
           <>
             <input
               accept="image/*"
-              id={`onUploadCityImage-${row.id}`}
+              id={`onUploadKitchenImage-${row.id}`}
               multiple
               type="file"
               style={{ display: "none" }}
-              onChange={(e) => onUploadCityImage(e)}
+              onChange={(e) => onUploadKitchenImage(e)}
             />
-            <label htmlFor={`onUploadCityImage-${row.id}`}>
+            <label htmlFor={`onUploadKitchenImage-${row.id}`}>
               <span
                 style={{ cursor: "pointer" }}
-                onClick={() => dispatch(setCuisineId(row?.id))}
+                onClick={() => dispatch(setKitchenId(row?.id))}
               >
                 <img
                   onError={handleImageError}
@@ -54,16 +57,16 @@ const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, ha
           <>
             <input
               accept="image/*"
-              id={`onUploadCityImage-${row.id}`}
+              id={`onUploadKitchenImage-${row.id}`}
               multiple
               type="file"
               style={{ display: "none" }}
-              onChange={(e) => onUploadCityImage(e)}
+              onChange={(e) => onUploadKitchenImage(e)}
             />
-            <label htmlFor={`onUploadCityImage-${row.id}`}>
+            <label htmlFor={`onUploadKitchenImage-${row.id}`}>
               <span
                 style={{ cursor: "pointer" }}
-                onClick={() => dispatch(setCuisineId(row?.id))}
+                onClick={() => dispatch(setKitchenId(row?.id))}
               >
                 <FaCloudUploadAlt size={30} />
               </span>
@@ -102,16 +105,16 @@ const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, ha
                 <div>
                   <input
                     accept="image/*"
-                    id={`onUploadCityImage-${row.id}`}
+                    id={`onUploadKitchenImage-${row.id}`}
                     multiple
                     type="file"
                     style={{ display: "none" }}
-                    onChange={(e) => onUploadCityImage(e)}
+                    onChange={(e) => onUploadKitchenImage(e)}
                   />
-                  <label htmlFor={`onUploadCityImage-${row.id}`}>
+                  <label htmlFor={`onUploadKitchenImage-${row.id}`}>
                     <h4
                       style={{ cursor: "pointer" }}
-                      onClick={() => dispatch(setCuisineId(row?.id))}
+                      onClick={() => dispatch(setKitchenId(row?.id))}
                     >
                       ReUpload   <FaCloudUploadAlt size={30} style={{ marginLeft: '10px' }} />
                     </h4>
@@ -147,4 +150,4 @@ const ImagePreviewColumn = ({ row, dispatch, setCuisineId, onUploadCityImage, ha
   );
 };
 
-export default ImagePreviewColumn;
+export default ImagePreviewColumnKitchen;

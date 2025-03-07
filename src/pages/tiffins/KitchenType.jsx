@@ -9,8 +9,11 @@ import { tableCustomStyles } from '../../components/tableCustomStyles';
 import { FaEdit } from "react-icons/fa";
 import { cater_vendor_type } from '../../constants';
 import { createMealTime, fetchMealTypes, updateMealTime, updateToggleMealTime } from '../../features/catering/mealSlice';
-import { createKitchenType, fetchKitchenTypes, updateKitchenType, updateToggleKitchenType } from '../../features/catering/kitchenSlice';
+import { createKitchenType, fetchKitchenTypes, setKitchenId, updateKitchenType, updateToggleKitchenType } from '../../features/catering/kitchenSlice';
 import Loader from '../../components/Loader';
+import ImagePreviewColumn from '../../components/ImagePreviewColumn';
+import ImagePreviewColumnKitchen from '../../components/ImagePreviewColumnKitchen';
+import useUploadCusinePhotoos from '../../hooks/useUploadCusinePhotoos';
 
 
 
@@ -28,6 +31,7 @@ const KitchenType = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [editId, setEditId] = useState(null)
+  const { onUploadKitchenImage } = useUploadCusinePhotoos()
 
   const [show, setShow] = useState(false);
   const handleClose = () => {
@@ -41,6 +45,10 @@ const KitchenType = () => {
     setValues({ ...values, [name]: value })
   }
 
+  const handleImageError = (e) => {
+    e.target.src = 'https://www.cateringsandtiffins.com/img/no-image.jpg'; // Provide the path to your error image here
+  };
+
   useEffect(() => {
     dispatch(fetchKitchenTypes());
   }, [dispatch]);
@@ -51,6 +59,7 @@ const KitchenType = () => {
       const formattedData = kitchenTypesList?.map((kitchen, index) => ({
         id: kitchen?.id,
         name: kitchen?.name,
+        image: kitchen?.file_name?.medium,
         createdAt: kitchen?.created_at,
         is_active: kitchen?.is_active
       }));
@@ -123,6 +132,19 @@ const KitchenType = () => {
       sortable: true,
     },
     {
+      name: "Image Preview",
+      cell: (row) => (
+        <ImagePreviewColumnKitchen
+          row={row}
+          dispatch={dispatch}
+          setKitchenId={setKitchenId}
+          onUploadKitchenImage={onUploadKitchenImage}
+          handleImageError={handleImageError}
+        />
+      ),
+      sortable: false,
+    },
+    {
       name: "Action",
       cell: (row) => (
         <>
@@ -181,7 +203,7 @@ const KitchenType = () => {
         <div className="row mb-4  me-2">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="header-title">
-            Total Kitchen Type List - {kitchenTypesList?.length}
+              Total Kitchen Type List - {kitchenTypesList?.length}
             </h1>
             <button className='btn btn-primary fit-content' variant="primary" onClick={handleShow}>
               Create Kitchen  Type

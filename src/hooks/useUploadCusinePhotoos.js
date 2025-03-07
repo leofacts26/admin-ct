@@ -6,11 +6,16 @@ import { setIsLoading } from '../features/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCateringCuisines } from '../features/catering/cateringSlice';
 import { fetchexplorecitiesData } from '../features/homepage/homeSlice';
+import { fetchKitchenTypes } from '../features/catering/kitchenSlice';
 
 const useUploadCusinePhotoos = () => {
     const dispatch = useDispatch()
     const { cuisineId } = useSelector((state) => state.users)
+    const { kitchenId } = useSelector((state) => state.kitchentypes)
     const { token } = useSelector((state) => state.authSlice);
+
+    console.log(kitchenId, "kitchenIdkitchenId");
+    
 
     const onUploadParentCuisine = async (event) => {
         const formData = new FormData();
@@ -64,9 +69,36 @@ const useUploadCusinePhotoos = () => {
         }
     }
 
+
+    const onUploadKitchenImage = async (event) => {
+        const formData = new FormData();
+        formData.append('id', kitchenId);
+        formData.append('image', event.target.files[0]);
+        formData.append('table', 'kitchen_types')
+        dispatch(setIsLoading(true))
+        try {
+            toast.loading('Uploading Image...');
+            const response = await api.post(`${BASE_URL}/admin-upload-kitchen-types`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            dispatch(fetchKitchenTypes());
+            toast.success(successToast(response))
+        } catch (error) {
+            console.log(error);
+            toast.error(datavalidationerror(error))
+        } finally {
+            dispatch(setIsLoading(false))
+            toast.dismiss();
+        }
+    }
+
     return {
         onUploadParentCuisine,
-        onUploadCityImage
+        onUploadCityImage,
+        onUploadKitchenImage
     }
 }
 

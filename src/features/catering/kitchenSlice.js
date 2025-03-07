@@ -7,6 +7,7 @@ import { cater_vendor_type, tiffin_vendor_type } from '../../constants';
 const initialState = {
   isLoading: true,
   kitchenTypesList: [],
+  kitchenId: null,
 }
 
 export const fetchKitchenTypes = createAsyncThunk(
@@ -86,7 +87,9 @@ export const kitchenSlice = createSlice({
   name: 'kitchentypes',
   initialState,
   reducers: {
-
+    setKitchenId: (state, action) => {
+      state.kitchenId = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -129,6 +132,6 @@ export const kitchenSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { } = kitchenSlice.actions
+export const { setKitchenId } = kitchenSlice.actions
 
 export default kitchenSlice.reducer
