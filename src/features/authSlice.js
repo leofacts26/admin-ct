@@ -84,6 +84,11 @@ export const authSlice = createSlice({
         setToken: (state, action) => {
             state.token = action.payload;
         },
+        logout: (state) => {
+            state.token = '';
+            localStorage.removeItem('token');
+            window.location.href = '/login'; // Redirect after logout
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -124,6 +129,6 @@ export const authSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setPhoneNumber, setOtpPage, setOtp, setToken } = authSlice.actions
+export const { setPhoneNumber, setOtpPage, setOtp, setToken, logout } = authSlice.actions
 
 export default authSlice.reducer
