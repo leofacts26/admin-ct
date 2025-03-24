@@ -654,15 +654,15 @@ const VendorList = () => {
 
       <CateringVendorDeletedList />
 
-      {/* <Modal centered show={show} onHide={handleClose}>
+      <Modal centered show={show} onHide={handleClose}>
         <form onSubmit={onHandleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title>{editId ? 'Edit Kitchen Type' : 'Create Kitchen Type'}</Modal.Title>
+            <Modal.Title>{editId ? 'Edit Action' : 'Create Action'}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="row"> */}
-      {/* Input field for Edit ID */}
-      {/* <div className="col-12 mb-3">
+            <div className="row">
+              {/* Input field for Edit ID */}
+              <div className="col-12 mb-3">
                 <label htmlFor="editId" className="form-label"><b>ID</b></label>
                 <input
                   disabled
@@ -673,11 +673,11 @@ const VendorList = () => {
                   onChange={(e) => setEditId(e.target.value)}
                   value={editId || ''}
                 />
-              </div> */}
+              </div>
 
 
-      {/* Select box for is_deleted_by_admin */}
-      {/* <div className="col-12 mb-3">
+              {/* Select box for is_deleted_by_admin */}
+              <div className="col-12 mb-3">
                 <label htmlFor="is_deleted_by_admin" className="form-label"><b>Deleted by Admin</b></label>
                 <select
                   className="form-select"
@@ -688,10 +688,10 @@ const VendorList = () => {
                   <option value="1">Yes</option>
                   <option value="2">No</option>
                 </select>
-              </div> */}
+              </div>
 
-      {/* Select box for listing_status */}
-      {/* <div className="col-12 mb-3">
+              {/* Select box for listing_status */}
+              <div className="col-12 mb-3">
                 <label htmlFor="listing_status" className="form-label"><b>Listing Status</b></label>
                 <select
                   className="form-select"
@@ -714,7 +714,7 @@ const VendorList = () => {
             </Button>
           </Modal.Footer>
         </form>
-      </Modal> */}
+      </Modal>
     </>
   );
 };
