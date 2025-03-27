@@ -120,7 +120,7 @@ const LeftNav = () => {
                                                     News Letter
                                                 </NavLink>
                                             </li>
-                                            <li className="nav-item">
+                                            {/* <li className="nav-item">
                                                 <NavLink to="/footer" className="nav-link">
                                                     Footer
                                                 </NavLink>
@@ -129,7 +129,7 @@ const LeftNav = () => {
                                                 <NavLink to="/social" className="nav-link">
                                                     Social
                                                 </NavLink>
-                                            </li>
+                                            </li> */}
                                             <li className="nav-item">
                                                 <NavLink to="/faq" className="nav-link">
                                                     Faq Management
