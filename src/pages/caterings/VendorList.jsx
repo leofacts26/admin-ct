@@ -17,6 +17,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { format, parse, isValid, compareAsc } from 'date-fns';
 import CateringVendorDeletedList from '../../components/CateringDeletedVendor';
 import Loader from '../../components/Loader';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const initialState = {
@@ -146,7 +147,7 @@ const VendorList = () => {
 
 
   const onHandleCateringDetails = (row) => {
-    handleShow();
+    // handleShow();
     dispatch(setVendorListId(row?.id));
   };
 
@@ -182,42 +183,41 @@ const VendorList = () => {
       selector: row => row.city,
       sortable: true,
     },
-    {
-      name: "Plan Type",
-      cell: (row) => {
-        let badgeClass = "badge mt-n1";
-        const planType = row.plan_type_name ? row.plan_type_name.toLowerCase() : "";
+    // {
+    //   name: "Plan Type",
+    //   cell: (row) => {
+    //     let badgeClass = "badge mt-n1";
+    //     const planType = row.plan_type_name ? row.plan_type_name.toLowerCase() : "";
 
-        switch (planType) {
-          case "subscription-monthly":
-            badgeClass += " monthly-tag";
-            break;
-          case "one_time_monthly":
-            badgeClass += " monthly-tag";
-            break;
-          case "one_time_yearly":
-            badgeClass += " annually-tag";
-            break;
-          default:
-            badgeClass += " text-bg-default-bage";
-            break;
-        }
+    //     switch (planType) {
+    //       case "subscription-monthly":
+    //         badgeClass += " monthly-tag";
+    //         break;
+    //       case "one_time_monthly":
+    //         badgeClass += " monthly-tag";
+    //         break;
+    //       case "one_time_yearly":
+    //         badgeClass += " annually-tag";
+    //         break;
+    //       default:
+    //         badgeClass += " text-bg-default-bage";
+    //         break;
+    //     }
 
-        return (
-          <span className={badgeClass}>
-            {row.plan_type_name || "Unknown Plan"}
-          </span>
-        );
-      },
-      sortable: true,
-      sortFunction: (a, b) => {
-        const textA = a.plan_type_name && a.plan_type_name.toLowerCase() !== "na" ? a.plan_type_name : "";
-        const textB = b.plan_type_name && b.plan_type_name.toLowerCase() !== "na" ? b.plan_type_name : "";
+    //     return (
+    //       <span className={badgeClass}>
+    //         {row.plan_type_name || "Unknown Plan"}
+    //       </span>
+    //     );
+    //   },
+    //   sortable: true,
+    //   sortFunction: (a, b) => {
+    //     const textA = a.plan_type_name && a.plan_type_name.toLowerCase() !== "na" ? a.plan_type_name : "";
+    //     const textB = b.plan_type_name && b.plan_type_name.toLowerCase() !== "na" ? b.plan_type_name : "";
 
-        // Case-insensitive comparison
-        return textA.toLowerCase().localeCompare(textB.toLowerCase());
-      },
-    },
+    //     return textA.toLowerCase().localeCompare(textB.toLowerCase());
+    //   },
+    // },
     {
       name: "Subscription",
       cell: (row) => {
@@ -290,11 +290,11 @@ const VendorList = () => {
         return dateA - dateB; // For ascending order
       }
     },
-    {
-      name: "Status Description",
-      selector: row => row.final_status_description,
-      sortable: true,
-    },
+    // {
+    //   name: "Status Description",
+    //   selector: row => row.final_status_description,
+    //   sortable: true,
+    // },
     {
       name: "Is Active",
       cell: (row) => {
@@ -358,7 +358,7 @@ const VendorList = () => {
           <button className="btn btn-danger me-1"
             onClick={() => handleEdit(row)}
           >
-            Delete
+             <DeleteIcon fontSize="small" />
           </button>
         </>
       ),
@@ -542,7 +542,7 @@ const VendorList = () => {
                   className="form-control"
                 />
               </div>
-              <div className="col-lg-3 mb-2">
+              {/* <div className="col-lg-3 mb-2">
                 <input
                   type="text"
                   value={searchValues.plan_type_name}
@@ -550,7 +550,7 @@ const VendorList = () => {
                   placeholder="Plan Type"
                   className="form-control"
                 />
-              </div>
+              </div> */}
               <div className="col-lg-3 mb-2">
                 <input
                   type="text"
@@ -580,7 +580,7 @@ const VendorList = () => {
                 />
               </div> */}
 
-              <div className="col-lg-3 mb-2">
+              {/* <div className="col-lg-3 mb-2">
                 <input
                   type="text"
                   value={searchValues.final_status_description}
@@ -588,7 +588,7 @@ const VendorList = () => {
                   placeholder="Status Description"
                   className="form-control"
                 />
-              </div>
+              </div> */}
               <div className="col-lg-3 mb-2">
                 <input
                   type="text"

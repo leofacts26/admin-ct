@@ -101,7 +101,7 @@ const Login = () => {
                   type="tel"
                   maxLength="10"
                   className="form-control"
-                  placeholder="Phone Number"
+                  placeholder="Enter OTP"
                   style={{
                     backgroundImage: 'url("data:image/png',
                     backgroundRepeat: "no-repeat",

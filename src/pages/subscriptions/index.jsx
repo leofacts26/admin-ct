@@ -318,7 +318,7 @@ const Subscription = () => {
       name: "View",
       cell: (row) => (
         <>
-          <button className="btn btn-success me-1" onClick={() => {
+          <button className="btn py-0 btn-success me-1" onClick={() => {
             handleSubscribeShow()
             setShowSubscribeModalData(row)
           }}>
@@ -339,7 +339,7 @@ const Subscription = () => {
               className="btn btn-danger me-1"
               onClick={() => onHandleSubscriptionModal(row)}
             >
-              Cancel <MdDelete />
+              <MdDelete />
             </button>
           )}
         </>
