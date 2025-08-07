@@ -124,12 +124,12 @@ const LeftNav = () => {
                                                 <NavLink to="/footer" className="nav-link">
                                                     Footer
                                                 </NavLink>
-                                            </li>
+                                            </li> */}
                                             <li className="nav-item">
                                                 <NavLink to="/social" className="nav-link">
                                                     Social
                                                 </NavLink>
-                                            </li> */}
+                                            </li>
                                             <li className="nav-item">
                                                 <NavLink to="/faq" className="nav-link">
                                                     Faq Management
