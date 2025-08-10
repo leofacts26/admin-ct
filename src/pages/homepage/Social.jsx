@@ -23,7 +23,7 @@ const Social = () => {
   const dispatch = useDispatch()
   const { socialList, isLoading } = useSelector((state) => state.footerSlice)
 
-  console.log(socialList, "socialList socialList");
+  // console.log(socialList, "socialList socialList");
 
 
   const [values, setValues] = useState(initialState)
@@ -92,19 +92,20 @@ const Social = () => {
 
 
   const columns = [
+    // {
+    //   name: "ID",
+    //   selector: row => row.id,
+    //   sortable: true,
+    // },
     {
-      name: "ID",
-      selector: row => row.id,
-      sortable: true,
-    },
-    {
-      name: "Start Price",
-      selector: row => row.link,
-      sortable: true,
-    },
-    {
-      name: "End Price",
+      name: "Name",
       selector: row => row.platform_name,
+      sortable: true,
+      width: '200px'
+    },
+    {
+      name: "Link",
+      selector: row => row.link,
       sortable: true,
     },
     {
