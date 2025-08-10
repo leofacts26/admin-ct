@@ -49,6 +49,7 @@ const SingleVendorDiscounts = () => {
     setShow(false)
     setEditId(null)
     setEditSubscriptionTypeId(null)
+    setValues(initialState)
   };
   const handleShow = () => setShow(true);
 
@@ -262,6 +263,7 @@ const SingleVendorDiscounts = () => {
   ];
 
 
+
   // const vendorCouponList = [
   //   {
   //     name: "S.No",
@@ -319,31 +321,50 @@ const SingleVendorDiscounts = () => {
 
 
   const handleEdit = (data) => {
-    console.log(data, "DATAAAAAA");
+    // console.log(data, "DATAAAAAA");
 
-    // Map vendor_type and coupon_type to match the values in select options
-    const mappedVendorType = data.vendor_type === 'Caterer' ? 'user-caterer' : data.vendor_type === 'Tiffin' ? 'user-tiffin' : '';
-    const mappedCouponType = data.coupon_type === 'Discount' ? 'discount' : data.coupon_type === 'Offer' ? 'offer' : '';
+    // Normalize vendor_type mapping
+    let mappedVendorType = "";
+    if (data?.vendor_type?.toLowerCase() === "caterer") {
+      mappedVendorType = "user-caterer";
+    } else if (data?.vendor_type?.toLowerCase() === "tiffin") {
+      mappedVendorType = "user-tiffin";
+    }
 
-    setEditId(data?.id)
-    setEditSubscriptionTypeId(data?.subscription_type_id)
-    handleShow()
+    // Normalize coupon_type mapping
+    let mappedCouponType = "";
+    if (data?.coupon_type?.toLowerCase() === "trial") {
+      mappedCouponType = "trial";
+    } else if (data?.coupon_type?.toLowerCase() === "regular") {
+      mappedCouponType = "regular";
+    }
+
+    setEditId(data?.id);
+    setEditSubscriptionTypeId(data?.subscription_type_id);
+    handleShow();
+
     if (data) {
       setValues(prevValues => ({
         ...prevValues,
         discount_name: data.discount_name || prevValues.discount_name,
-        vendor_type: mappedVendorType || prevValues.vendor_type, // Use mapped value for vendor_type
-        coupon_type: mappedCouponType || prevValues.coupon_type, // Use mapped value for coupon_type
+        vendor_type: mappedVendorType || prevValues.vendor_type, // matched with <option> values
+        coupon_type: mappedCouponType || prevValues.coupon_type, // matched with <option> values
         coupon_code: data.coupon_code || prevValues.coupon_code,
-        valid_from: data.valid_from ? new Date(data.valid_from).toISOString().split('T')[0] : prevValues.valid_from,
-        valid_till: data.valid_till ? new Date(data.valid_till).toISOString().split('T')[0] : prevValues.valid_till,
+        valid_from: data.valid_from
+          ? new Date(data.valid_from).toISOString().split("T")[0]
+          : prevValues.valid_from,
+        valid_till: data.valid_till
+          ? new Date(data.valid_till).toISOString().split("T")[0]
+          : prevValues.valid_till,
         status: data.status || prevValues.status,
         discount_percent: data.discount_percent || prevValues.discount_percent,
         discount_price: data.discount_price || prevValues.discount_price,
         vendor_id: data.vendor_id || prevValues.vendor_id,
       }));
     }
-  }
+  };
+
+
   const handleDelete = (event) => {
     console.log(event, "event");
   }
@@ -361,6 +382,9 @@ const SingleVendorDiscounts = () => {
       id: editId,
       subscription_type_id: editSubscriptionTypeId
     }
+
+    // console.log(data, "data111")
+    // console.log(updateData, "updateData111")
 
     if (editId === null) {
       await dispatch(createCouponList(data))
@@ -481,7 +505,7 @@ const SingleVendorDiscounts = () => {
                   <select className="form-select" name="status" value={values.status} onChange={onHandleChange}>
                     <option value="">Select Status</option>
                     <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
+                    <option value="Expired">Inactive</option>
                   </select>
                 </div>
               </div>
@@ -512,7 +536,7 @@ const SingleVendorDiscounts = () => {
                   <select className="form-select" name="coupon_type" value={values.coupon_type} onChange={onHandleChange}>
                     <option value="">Select Coupon Type</option>
                     <option value="trial">Trial</option>
-                    <option value="regular ">Regular </option>
+                    <option value="regular">Regular </option>
                   </select>
                 </div>
               </div>

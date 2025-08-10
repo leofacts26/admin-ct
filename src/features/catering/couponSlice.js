@@ -39,7 +39,8 @@ export const createCouponList = createAsyncThunk(
       });
       return response?.data?.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.msg);
+      // return thunkAPI.rejectWithValue(error.response.data.msg);
+      toast.error(error.response.data.message)
     }
   }
 )
@@ -58,7 +59,9 @@ export const updateCouponList = createAsyncThunk(
       });
       return response?.data?.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.msg);
+      // console.log(error, "errorerrorerror");
+      toast.error(error.response.data.message)
+      // return thunkAPI.rejectWithValue(error.response.data.msg);
     }
   }
 )

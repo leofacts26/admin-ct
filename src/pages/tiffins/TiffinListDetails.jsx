@@ -292,7 +292,7 @@ const TiffinListDetails = () => {
               <th style={{ fontSize: '10px' }}>Food Type</th>
               <th style={{ fontSize: '10px' }}>Meal Types</th>
               <th style={{ fontSize: '10px' }}>service Types</th>
-              <th style={{ fontSize: '10px' }}>serving Types</th>
+              <th style={{ fontSize: '10px' }}>Kitchen Types</th>
               <th style={{ fontSize: '10px' }}>Starting Price</th>
             </tr>
           </thead>
@@ -307,7 +307,7 @@ const TiffinListDetails = () => {
               <td>
                 {serviceTypes?.length > 0 ? serviceTypes?.map(item => item.service_type_name)?.join(', ') : 'N/A'}
               </td>
-              <td>{servingTypes?.length > 0 ? servingTypes?.map(item => item.serving_type_name)?.join(', ') : 'N/A'}</td>
+              <td>{kitchenTypes?.length > 0 ? kitchenTypes?.map(item => item.kitchen_type_name)?.join(', ') : 'N/A'}</td>
               <td>{cateringVendorsDetail?.start_price ? cateringVendorsDetail?.start_price : 'N/A'}</td>
             </tr>
           </tbody>

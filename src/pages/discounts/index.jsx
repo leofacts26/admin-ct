@@ -12,7 +12,7 @@ import Loader from '../../components/Loader';
 
 const initialState = {
   discount_name: '',
-  vendor_type: '',  
+  vendor_type: '',
   coupon_code: '',
   valid_from: '',
   valid_till: '',
@@ -307,11 +307,11 @@ const Discounts = () => {
 
 
   const handleEdit = (data) => {
-    // Map vendor_type and coupon_type to match the values in select options
-    const mappedVendorType = data.vendor_type === 'user-caterer' ? 'user-caterer' : data.vendor_type === 'Tiffin' ? 'user-tiffin' : '';
-    const mappedCouponType = data.coupon_type === 'discount' ? 'discount' : data.coupon_type === 'Offer' ? 'offer' : '';
+    // // Map vendor_type and coupon_type to match the values in select options
+    // const mappedVendorType = data.vendor_type === 'user-caterer' ? 'user-caterer' : data.vendor_type === 'Tiffin' ? 'user-tiffin' : '';
+    // const mappedCouponType = data.coupon_type === 'discount' ? 'discount' : data.coupon_type === 'Offer' ? 'offer' : '';
 
-    console.log(data, "data data");
+    // console.log(data, "data data");
 
 
     setEditId(data?.id)
@@ -321,8 +321,8 @@ const Discounts = () => {
       setValues(prevValues => ({
         ...prevValues,
         discount_name: data.discount_name || prevValues.discount_name,
-        vendor_type: data.vendor_type || prevValues.vendor_type, // Use mapped value for vendor_type
-        coupon_type: data.coupon_type || prevValues.coupon_type, // Use mapped value for coupon_type
+        vendor_type: data.vendor_type ? data.vendor_type.toLowerCase() : prevValues.vendor_type.toLowerCase(),
+        coupon_type: data.coupon_type ? data.coupon_type.toLowerCase() : prevValues.coupon_type.toLowerCase(),
         coupon_code: data.coupon_code || prevValues.coupon_code,
         valid_from: data.valid_from ? new Date(data.valid_from).toISOString().split('T')[0] : prevValues.valid_from,
         valid_till: data.valid_till ? new Date(data.valid_till).toISOString().split('T')[0] : prevValues.valid_till,
@@ -350,6 +350,10 @@ const Discounts = () => {
       subscription_type_id: editSubscriptionTypeId
     }
 
+    // console.log(data, "data111")
+    // console.log(updateData, "updateData111")
+
+
     if (editId === null) {
       await dispatch(createCouponList(data))
     } else {
@@ -358,6 +362,8 @@ const Discounts = () => {
     await dispatch(fetchCouponList())
     handleClose()
   }
+
+  console.log(values, "valuesvalues")
 
   return (
     <>
@@ -459,7 +465,7 @@ const Discounts = () => {
                   <select className="form-select" name="status" value={values.status} onChange={onHandleChange}>
                     <option value="">Select Status</option>
                     <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
+                    <option value="Expired">Inactive</option>
                   </select>
                 </div>
               </div>
@@ -490,7 +496,7 @@ const Discounts = () => {
                   <select className="form-select" name="coupon_type" value={values.coupon_type} onChange={onHandleChange}>
                     <option value="">Select Coupon Type</option>
                     <option value="trial">Trial</option>
-                    <option value="regular ">Regular </option>
+                    <option value="regular">Regular</option>
                   </select>
                 </div>
               </div>

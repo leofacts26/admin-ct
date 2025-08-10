@@ -43,70 +43,76 @@ const Dashboard = () => {
       <div className="container-fluid">
         <div className="row">
 
-          <div className="col-12 col-lg-6 col-xl">
-            <div className="card">
-              <div className="card-body">
-                <div className="row align-items-center gx-0">
-                  <div className="col">
-                    <h6 className="text-uppercase text-body-secondary mb-2">catering vendor count</h6>
-                    <span className="h2 mb-0 text-center">{dashboardCount.catering_vendor_count}</span>
+          <div className="container-fluid">
+
+            <div className="row">
+              <div className="col-12 col-lg-6 col-xl">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="row align-items-center gx-0">
+                      <div className="col">
+                        <h6 className="text-uppercase text-body-secondary mb-2">catering vendor count</h6>
+                        <span className="h2 mb-0 text-center">{dashboardCount.catering_vendor_count}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div className="col-12 col-lg-6 col-xl">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="row align-items-center gx-0">
+                      <div className="col">
+                        <h6 className="text-uppercase text-body-secondary mb-2">tiffins vendor count</h6>
+                        <span className="h2 mb-0 text-center">{dashboardCount.tiffins_vendor_count}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 col-lg-6 col-xl">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="row align-items-center gx-0">
+                      <div className="col">
+                        <h6 className="text-uppercase text-body-secondary mb-2">total inactive vendors</h6>
+                        <span className="h2 mb-0 text-center">{dashboardCount.total_inactive_vendors}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 col-lg-6 col-xl">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="row align-items-center gx-0">
+                      <div className="col">
+                        <h6 className="text-uppercase text-body-secondary mb-2">total newsletter subs</h6>
+                        <span className="h2 mb-0 text-center">{dashboardCount.total_newsletter_subs}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 col-lg-6 col-xl">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="row align-items-center gx-0">
+                      <div className="col">
+                        <h6 className="text-uppercase text-body-secondary mb-2">total registered users</h6>
+                        <span className="h2 mb-0 text-center">{dashboardCount.total_registered_users}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-
-          <div className="col-12 col-lg-6 col-xl">
-            <div className="card">
-              <div className="card-body">
-                <div className="row align-items-center gx-0">
-                  <div className="col">
-                    <h6 className="text-uppercase text-body-secondary mb-2">tiffins vendor count</h6>
-                    <span className="h2 mb-0 text-center">{dashboardCount.tiffins_vendor_count}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-12 col-lg-6 col-xl">
-            <div className="card">
-              <div className="card-body">
-                <div className="row align-items-center gx-0">
-                  <div className="col">
-                    <h6 className="text-uppercase text-body-secondary mb-2">total inactive vendors</h6>
-                    <span className="h2 mb-0 text-center">{dashboardCount.total_inactive_vendors}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-12 col-lg-6 col-xl">
-            <div className="card">
-              <div className="card-body">
-                <div className="row align-items-center gx-0">
-                  <div className="col">
-                    <h6 className="text-uppercase text-body-secondary mb-2">total newsletter subs</h6>
-                    <span className="h2 mb-0 text-center">{dashboardCount.total_newsletter_subs}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-12 col-lg-6 col-xl">
-            <div className="card">
-              <div className="card-body">
-                <div className="row align-items-center gx-0">
-                  <div className="col">
-                    <h6 className="text-uppercase text-body-secondary mb-2">total registered users</h6>
-                    <span className="h2 mb-0 text-center">{dashboardCount.total_registered_users}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>
