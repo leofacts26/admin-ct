@@ -197,7 +197,7 @@ const BroadcastNotification = () => {
             <div>
               <label htmlFor="vendor_type" className="form-label">Select Type</label>
               <select
-                required
+                // required
                 name="type"
                 className="form-select"
                 value={values.type}
