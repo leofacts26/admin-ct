@@ -203,7 +203,7 @@ const BroadcastNotification = () => {
                 value={values.type}
                 onChange={(e) => setType(e.target.value)}
               >
-                <option value="">Select Type</option>
+                <option value="">All Vendors Selected</option>
                 <option value="Caterer">Caterer</option>
                 <option value="Tiffin">Tiffin</option>
                 <option value="User">User </option>
@@ -221,8 +221,8 @@ const BroadcastNotification = () => {
                 onChange={handleChange}
               >
                 <>
-                  <option value="">Select Subscription Type</option>
-                  {vendorSubscriptionTypesList?.map((item) => (
+                  <option value="">All Sub types Selected</option>
+                  {vendorSubscriptionTypesList?.filter((item)=> item.is_active === 1)?.map((item) => (
                     <option key={item?.id} value={item?.id}>
                       {item?.display_name}
                     </option>
@@ -266,7 +266,7 @@ const BroadcastNotification = () => {
               Close
             </Button>
             <Button variant="primary" type='submit' disabled={isLoading}>
-              {isLoading ? 'Loading...' : 'Save Changes'}
+              {isLoading ? 'Loading...' : 'Send Notification'}
             </Button>
           </Modal.Footer>
         </form>
