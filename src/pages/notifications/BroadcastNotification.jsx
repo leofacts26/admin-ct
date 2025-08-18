@@ -214,7 +214,7 @@ const BroadcastNotification = () => {
             {type && type !== 'User' && <div className='mt-3'>
               <label for="name" className="form-label">Subscription Types</label>
               <select
-                required
+                // required
                 className="form-select"
                 name="subscriptionTypeId"
                 value={values.subscriptionTypeId}
