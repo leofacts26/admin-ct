@@ -348,16 +348,16 @@ const VendorListDetails = () => {
           <Table responsive="xl" className='m-0'>
             <thead>
               <tr>
-                <th style={{ fontSize: '10px' }}>Vendor ID</th>
-                <th style={{ fontSize: '10px' }}>Login ID</th>
+                <th style={{ fontSize: '10px' }}>Company ID</th>
                 <th style={{ fontSize: '10px' }}>Vendor Type</th>
+                <th style={{ fontSize: '10px' }}>Created By</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{id ? id : 'N/A'}</td>
                 <td>{companyId}</td>
                 <td>{cateringVendorsDetail?.vendor_type ? cateringVendorsDetail?.vendor_type : 'N/A'}</td>
+                <td>{cateringVendorsDetail?.created_by ? cateringVendorsDetail?.created_by : 'N/A'}</td>
               </tr>
             </tbody>
           </Table>
